@@ -49,7 +49,7 @@ const HeroSection = () => {
         </div>
 
         {/* Get started button */}
-        <div className="relative z-10 pb-8 -mt-4">
+        <div className="relative z-10 pb-8 mt-auto flex justify-center">
           <button
             className="btn-primary"
             onClick={() => document.getElementById('ai-medicine')?.scrollIntoView({ behavior: 'smooth' })}
