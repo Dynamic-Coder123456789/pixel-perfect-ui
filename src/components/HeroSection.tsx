@@ -36,6 +36,15 @@ const HeroSection = () => {
           <p className="mt-4 text-muted-foreground text-sm max-w-md mx-auto leading-relaxed">
             Empowering individuals and healthcare professionals with advanced diagnostic tools and personalized treatment plans.
           </p>
+          {/* Get started button */}
+          <div className="mt-6 flex justify-center">
+            <button
+              className="btn-primary"
+              onClick={() => document.getElementById('ai-medicine')?.scrollIntoView({ behavior: 'smooth' })}
+            >
+              Get started
+            </button>
+          </div>
         </div>
 
         {/* Spline 3D background */}
@@ -46,16 +55,6 @@ const HeroSection = () => {
               style={{ width: "100%", height: "100%" }}
             />
           </Suspense>
-        </div>
-
-        {/* Get started button */}
-        <div className="relative z-10 pb-8 mt-auto flex justify-center">
-          <button
-            className="btn-primary"
-            onClick={() => document.getElementById('ai-medicine')?.scrollIntoView({ behavior: 'smooth' })}
-          >
-            Get started
-          </button>
         </div>
       </div>
     </section>
