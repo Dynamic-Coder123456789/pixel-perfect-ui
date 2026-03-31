@@ -47,35 +47,6 @@ const AIMedicineSection = () => {
           </button>
         </div>
 
-        {/* Center visual */}
-        <div className="relative w-full flex-1 flex items-center justify-center mt-8">
-          {/* Phone with body visual */}
-          <div className="relative z-10 w-[220px] h-[400px] rounded-[28px] border-[6px] border-card-foreground/80 bg-card-foreground/10 overflow-hidden">
-            {/* Replace this placeholder image with actual assets later */}
-            <img src={aiDiagnostics} alt="DNA visualization" className="w-full h-full object-cover" />
-          </div>
-
-          {/* Floating spheres */}
-          {/* Replace this placeholder image with actual assets later */}
-          <div className="absolute right-[15%] top-[10%] w-[140px] h-[140px] rounded-full overflow-hidden animate-float opacity-80">
-            <img src={aiDiagnostics} alt="DNA sphere" className="w-full h-full object-cover rounded-full" />
-          </div>
-          {/* Replace this placeholder image with actual assets later */}
-          <div className="absolute left-[20%] bottom-[5%] w-[80px] h-[80px] rounded-full overflow-hidden animate-float-delay opacity-70">
-            <img src={aiDiagnostics} alt="DNA sphere" className="w-full h-full object-cover rounded-full" />
-          </div>
-        </div>
-
-        {/* Left: Interactive symptom checker label */}
-        <div className="absolute left-8 bottom-[20%] z-10">
-          <h3 className="text-xl font-semibold text-card-foreground">Interactive<br />symptom<br />checker</h3>
-          <div className="mt-3 w-10 h-10 rounded-full bg-card-foreground flex items-center justify-center">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">
-              <path d="M3 12h4l3-9 4 18 3-9h4" />
-            </svg>
-          </div>
-        </div>
-
         {/* Right: Description */}
         <div className="absolute right-8 bottom-[18%] z-10 max-w-[220px]">
           <p className="text-xs text-muted-foreground leading-relaxed">
