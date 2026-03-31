@@ -30,7 +30,7 @@ const AIMedicineSection = () => {
         {/* Heading */}
         <div className="text-center z-10 max-w-2xl">
           <h2 className="text-3xl md:text-4xl lg:text-[2.8rem] font-medium leading-tight text-card-foreground tracking-tight">
-            Leading with <span className="pill-hero">AI ⚡</span> in Medicine:
+            Leading with <span className="pill-hero">AI</span> in Medicine:
             <br />Innovating Today For a Healthier Tomorrow
           </h2>
         </div>
