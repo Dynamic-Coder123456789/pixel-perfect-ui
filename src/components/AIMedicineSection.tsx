@@ -52,17 +52,17 @@ const AIMedicineSection = () => {
           {/* Phone with body visual */}
           <div className="relative z-10 w-[220px] h-[400px] rounded-[28px] border-[6px] border-card-foreground/80 bg-card-foreground/10 overflow-hidden">
             {/* Replace this placeholder image with actual assets later */}
-            <img src={dnaHelix} alt="DNA visualization" className="w-full h-full object-cover" />
+            <img src={aiDiagnostics} alt="DNA visualization" className="w-full h-full object-cover" />
           </div>
 
           {/* Floating spheres */}
           {/* Replace this placeholder image with actual assets later */}
           <div className="absolute right-[15%] top-[10%] w-[140px] h-[140px] rounded-full overflow-hidden animate-float opacity-80">
-            <img src={dnaHelix} alt="DNA sphere" className="w-full h-full object-cover rounded-full" />
+            <img src={aiDiagnostics} alt="DNA sphere" className="w-full h-full object-cover rounded-full" />
           </div>
           {/* Replace this placeholder image with actual assets later */}
           <div className="absolute left-[20%] bottom-[5%] w-[80px] h-[80px] rounded-full overflow-hidden animate-float-delay opacity-70">
-            <img src={dnaHelix} alt="DNA sphere" className="w-full h-full object-cover rounded-full" />
+            <img src={aiDiagnostics} alt="DNA sphere" className="w-full h-full object-cover rounded-full" />
           </div>
         </div>
 

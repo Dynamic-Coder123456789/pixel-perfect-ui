@@ -1,4 +1,4 @@
-import dnaHelix from "@/assets/dna-helix.png";
+import remoteMonitoring from "@/assets/remote-monitoring.jpg";
 
 const RemoteMonitoringSection = () => {
   return (
