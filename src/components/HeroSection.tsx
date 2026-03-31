@@ -1,4 +1,5 @@
 import { Suspense, lazy } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Spline = lazy(() => import("@splinetool/react-spline"));
 
