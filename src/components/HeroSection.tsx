@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 const Spline = lazy(() => import("@splinetool/react-spline"));
 
 const HeroSection = () => {
+  const navigate = useNavigate();
   return (
     <section id="hero" className="relative px-4 sm:px-6 pb-8 max-w-[1600px] mx-auto">
       {/* Main container */}
