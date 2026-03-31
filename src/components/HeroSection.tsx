@@ -1,4 +1,6 @@
-import dnaHelix from "@/assets/dna-helix.png";
+import { Suspense, lazy } from "react";
+
+const Spline = lazy(() => import("@splinetool/react-spline"));
 
 const HeroSection = () => {
   return (
