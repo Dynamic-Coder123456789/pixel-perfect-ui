@@ -1,5 +1,5 @@
 import { useState } from "react";
-import dnaHelix from "@/assets/dna-helix.png";
+import aiDiagnostics from "@/assets/ai-diagnostics.jpg";
 
 const AIMedicineSection = () => {
   const [showDemo, setShowDemo] = useState(false);
