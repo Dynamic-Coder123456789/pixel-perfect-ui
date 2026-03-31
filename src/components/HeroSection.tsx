@@ -42,7 +42,7 @@ const HeroSection = () => {
           <div className="mt-6 flex justify-center">
             <button
               className="btn-primary"
-              onClick={() => document.getElementById('ai-medicine')?.scrollIntoView({ behavior: 'smooth' })}
+              onClick={() => navigate('/dashboard')}
             >
               Get started
             </button>
