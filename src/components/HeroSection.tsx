@@ -1,8 +1,10 @@
 import { Suspense, lazy } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Spline = lazy(() => import("@splinetool/react-spline"));
 
 const HeroSection = () => {
+  const navigate = useNavigate();
   return (
     <section id="hero" className="relative px-4 sm:px-6 pb-8 max-w-[1600px] mx-auto">
       {/* Main container */}
@@ -40,7 +42,7 @@ const HeroSection = () => {
           <div className="mt-6 flex justify-center">
             <button
               className="btn-primary"
-              onClick={() => document.getElementById('ai-medicine')?.scrollIntoView({ behavior: 'smooth' })}
+              onClick={() => navigate('/dashboard')}
             >
               Get started
             </button>

@@ -1,4 +1,4 @@
-import dnaHelix from "@/assets/dna-helix.png";
+import remoteMonitoring from "@/assets/remote-monitoring.jpg";
 
 const RemoteMonitoringSection = () => {
   return (
@@ -9,7 +9,7 @@ const RemoteMonitoringSection = () => {
           {/* Brain/top background visual */}
           {/* Replace this placeholder image with actual assets later */}
           <div className="absolute top-0 left-0 right-0 h-[200px] overflow-hidden rounded-t-3xl opacity-30">
-            <img src={dnaHelix} alt="DNA background" className="w-full h-full object-cover" style={{ filter: 'blur(2px) hue-rotate(220deg)' }} />
+            <img src={remoteMonitoring} alt="DNA background" className="w-full h-full object-cover" style={{ filter: 'blur(2px) hue-rotate(220deg)' }} />
           </div>
 
           {/* Heading */}
@@ -27,7 +27,7 @@ const RemoteMonitoringSection = () => {
           <div className="relative z-10 mt-8 w-full max-w-[700px]">
             <div className="rounded-2xl border-[6px] border-card-foreground/70 bg-card-foreground/5 overflow-hidden shadow-2xl aspect-[4/3]">
               {/* Replace this placeholder image with actual assets later */}
-              <img src={dnaHelix} alt="Dashboard mockup" className="w-full h-full object-cover" />
+              <img src={remoteMonitoring} alt="Dashboard mockup" className="w-full h-full object-cover" />
             </div>
 
             {/* Navigation arrows */}
@@ -42,17 +42,17 @@ const RemoteMonitoringSection = () => {
           {/* Floating spheres inside container */}
           {/* Replace this placeholder image with actual assets later */}
           <div className="absolute left-[5%] top-[35%] w-[120px] h-[120px] rounded-full overflow-hidden animate-float z-[5] opacity-60">
-            <img src={dnaHelix} alt="DNA sphere" className="w-full h-full object-cover rounded-full" />
+            <img src={remoteMonitoring} alt="DNA sphere" className="w-full h-full object-cover rounded-full" />
           </div>
           {/* Replace this placeholder image with actual assets later */}
           <div className="absolute right-[8%] top-[25%] w-[60px] h-[60px] rounded-full overflow-hidden animate-float-delay z-[5] opacity-50">
-            <img src={dnaHelix} alt="DNA sphere" className="w-full h-full object-cover rounded-full" />
+            <img src={remoteMonitoring} alt="DNA sphere" className="w-full h-full object-cover rounded-full" />
           </div>
 
           {/* Bottom glow visual */}
           {/* Replace this placeholder image with actual assets later */}
           <div className="absolute bottom-0 left-0 right-0 h-[200px] overflow-hidden rounded-b-3xl opacity-40">
-            <img src={dnaHelix} alt="DNA glow" className="w-full h-full object-cover" style={{ filter: 'blur(4px) hue-rotate(280deg) saturate(1.5)' }} />
+            <img src={remoteMonitoring} alt="DNA glow" className="w-full h-full object-cover" style={{ filter: 'blur(4px) hue-rotate(280deg) saturate(1.5)' }} />
           </div>
         </div>
       </div>
