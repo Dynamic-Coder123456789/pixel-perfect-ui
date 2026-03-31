@@ -33,7 +33,7 @@ const HeroSection = () => {
         <div className="text-center mt-8 z-10 px-4">
           <h1 className="text-4xl md:text-5xl lg:text-[3.2rem] font-medium leading-tight text-card-foreground tracking-tight">
             Revolutionizing <span className="pill-hero">healthcare</span>
-            <br />with ai and biotechnology
+            <br />with AI and biotechnology
           </h1>
           <p className="mt-4 text-muted-foreground text-sm max-w-md mx-auto leading-relaxed">
             Empowering individuals and healthcare professionals with advanced diagnostic tools and personalized treatment plans.
