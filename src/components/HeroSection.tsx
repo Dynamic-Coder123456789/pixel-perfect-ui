@@ -1,10 +1,10 @@
-const PLACEHOLDER = "https://via.placeholder.com/1200x800";
+import dnaHelix from "@/assets/dna-helix.png";
 
 const HeroSection = () => {
   return (
-    <section className="relative px-6 pb-8 max-w-[1400px] mx-auto">
+    <section id="hero" className="relative px-4 sm:px-6 pb-8 max-w-[1600px] mx-auto">
       {/* Main container */}
-      <div className="section-container relative min-h-[700px] flex flex-col items-center overflow-visible">
+      <div className="section-container relative min-h-[700px] flex flex-col items-center overflow-hidden">
         {/* Inner navbar */}
         <div className="flex items-center justify-between w-full px-8 pt-6 pb-4 z-10">
           <div className="flex items-center gap-2 text-card-foreground">
@@ -15,13 +15,13 @@ const HeroSection = () => {
             <span className="text-sm font-medium text-card-foreground">genomic</span>
           </div>
           <div className="flex items-center gap-6 text-sm text-muted-foreground">
-            <span className="relative">For partners <span className="absolute -top-1 -right-2 w-1.5 h-1.5 rounded-full bg-primary" /></span>
-            <span>For investors</span>
+            <span className="relative cursor-pointer hover:text-card-foreground transition-colors">For partners <span className="absolute -top-1 -right-2 w-1.5 h-1.5 rounded-full bg-primary" /></span>
+            <span className="cursor-pointer hover:text-card-foreground transition-colors">For investors</span>
           </div>
           <div className="flex items-center gap-4 text-sm text-muted-foreground">
-            <span>En</span>
+            <span className="cursor-pointer hover:text-card-foreground transition-colors">En</span>
             <span className="opacity-50">De</span>
-            <span className="font-medium text-card-foreground">Menu +</span>
+            <span className="font-medium text-card-foreground cursor-pointer">Menu +</span>
           </div>
         </div>
 
@@ -41,8 +41,8 @@ const HeroSection = () => {
           {/* DNA/background visual */}
           {/* Replace this placeholder image with actual assets later */}
           <img
-            src={PLACEHOLDER}
-            alt="placeholder"
+            src={dnaHelix}
+            alt="DNA helix background"
             className="absolute inset-x-0 bottom-0 w-full h-[420px] object-cover rounded-b-3xl opacity-90"
           />
 
@@ -61,36 +61,13 @@ const HeroSection = () => {
 
         {/* Get started button */}
         <div className="relative z-10 pb-8 -mt-4">
-          <button className="btn-primary">Get started</button>
+          <button
+            className="btn-primary"
+            onClick={() => document.getElementById('ai-medicine')?.scrollIntoView({ behavior: 'smooth' })}
+          >
+            Get started
+          </button>
         </div>
-      </div>
-
-      {/* Left floating card */}
-      <div className="absolute left-0 top-[55%] -translate-x-4 z-20 float-card p-6 max-w-[220px] animate-float">
-        <div className="w-12 h-12 rounded-full gradient-bg flex items-center justify-center mb-4">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">
-            <circle cx="12" cy="12" r="8" />
-            <path d="M12 8v4l3 3" />
-          </svg>
-        </div>
-        <h3 className="font-semibold text-card-foreground text-sm mb-2">AI-Powered diagnostics</h3>
-        <p className="text-xs text-muted-foreground leading-relaxed">
-          Our tools analyze vast amounts of genomic data to identify potential health issues early.
-        </p>
-      </div>
-
-      {/* Right floating video card */}
-      <div className="absolute right-0 top-[60%] translate-x-2 z-20 float-card w-[180px] h-[140px] overflow-hidden animate-float-delay">
-        {/* Replace this placeholder image with actual assets later */}
-        <img src={PLACEHOLDER} alt="placeholder" className="w-full h-full object-cover rounded-2xl" />
-        <div className="absolute inset-0 flex items-center justify-center">
-          <div className="w-10 h-10 rounded-full bg-card/80 backdrop-blur-sm flex items-center justify-center">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="hsl(var(--card-foreground))">
-              <polygon points="5,3 19,12 5,21" />
-            </svg>
-          </div>
-        </div>
-        <div className="absolute bottom-2 left-2 text-[10px] text-card bg-card-foreground/60 rounded px-1.5 py-0.5">01:56</div>
       </div>
     </section>
   );
