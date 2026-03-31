@@ -1,4 +1,6 @@
-import dnaHelix from "@/assets/dna-helix.png";
+import { Suspense, lazy } from "react";
+
+const Spline = lazy(() => import("@splinetool/react-spline"));
 
 const HeroSection = () => {
   return (
@@ -36,27 +38,14 @@ const HeroSection = () => {
           </p>
         </div>
 
-        {/* Phone mockup + DNA background */}
-        <div className="relative w-full flex-1 flex items-center justify-center mt-6">
-          {/* DNA/background visual */}
-          {/* Replace this placeholder image with actual assets later */}
-          <img
-            src={dnaHelix}
-            alt="DNA helix background"
-            className="absolute inset-x-0 bottom-0 w-full h-[420px] object-cover rounded-b-3xl opacity-90"
-          />
-
-          {/* Phone mockup */}
-          <div className="relative z-10 w-[180px] h-[360px] rounded-[28px] border-[6px] border-card-foreground/80 bg-card overflow-hidden shadow-2xl">
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-16 h-5 bg-card-foreground/80 rounded-b-xl" />
-            <div className="flex items-center justify-center h-full">
-              <svg width="36" height="36" viewBox="0 0 24 24" fill="none">
-                <circle cx="12" cy="12" r="10" stroke="hsl(var(--card-foreground))" strokeWidth="1.5" />
-                <circle cx="12" cy="12" r="5" stroke="hsl(var(--card-foreground))" strokeWidth="1.5" />
-              </svg>
-              <span className="ml-2 text-xs font-medium text-card-foreground">genomic</span>
-            </div>
-          </div>
+        {/* Spline 3D background */}
+        <div className="absolute inset-0 z-0 rounded-3xl overflow-hidden">
+          <Suspense fallback={<div className="w-full h-full bg-card" />}>
+            <Spline
+              scene="https://prod.spline.design/phYv9pSDh3VjEFWm/scene.splinecode"
+              style={{ width: "100%", height: "100%" }}
+            />
+          </Suspense>
         </div>
 
         {/* Get started button */}
