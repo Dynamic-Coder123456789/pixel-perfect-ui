@@ -34,7 +34,7 @@ const AIMedicineSection = () => {
           <Suspense fallback={<div className="w-full h-full bg-card" />}>
             <div style={{ width: "100%", height: "100%" }}>
               <Spline
-                scene="https://prod.spline.design/mM5NaLoi32-wIXDb/scene.splinecode"
+                scene="https://prod.spline.design/HGceMlEMZBHAHg98/scene.splinecode"
                 style={{ width: "100%", height: "100%" }}
               />
             </div>
