@@ -1,6 +1,7 @@
-import { useState } from "react";
-
+import { useState, Suspense, lazy } from "react";
 import { motion } from "framer-motion";
+
+const Spline = lazy(() => import("@splinetool/react-spline"));
 
 const fadeUp = {
 
@@ -156,6 +157,15 @@ const AIMedicineSection = () => {
 
         </motion.div>
 
+        {/* Spline 3D background */}
+        <div className="absolute inset-0 z-0 overflow-hidden opacity-40">
+          <Suspense fallback={<div className="w-full h-full bg-card" />}>
+            <Spline
+              scene="https://prod.spline.design/mM5NaLoi32-wIXDb/scene.splinecode"
+              style={{ width: "100%", height: "100%" }}
+            />
+          </Suspense>
+        </div>
       </div>
 
       {/* Bottom info row */}
