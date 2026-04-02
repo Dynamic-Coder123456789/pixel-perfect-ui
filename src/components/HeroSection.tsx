@@ -1,16 +1,22 @@
 import { Suspense, lazy } from "react";
 import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 
 const Spline = lazy(() => import("@splinetool/react-spline"));
 
 const HeroSection = () => {
   const navigate = useNavigate();
   return (
-    <section id="hero" className="relative px-2 sm:px-4 pb-4 w-full mx-auto">
-      {/* Main container */}
-      <div className="section-container relative flex flex-col items-center overflow-hidden" style={{ minHeight: 'min(1080px, 100vh)', aspectRatio: '16/9' }}>
+    <section id="hero" className="relative w-full">
+      {/* Main container - full viewport */}
+      <div className="section-container relative min-h-screen flex flex-col items-center overflow-hidden">
         {/* Inner navbar */}
-        <div className="flex items-center justify-between w-full px-8 pt-6 pb-4 z-10">
+        <motion.div
+          className="flex items-center justify-between w-full px-8 pt-6 pb-4 z-10"
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+        >
           <div className="flex items-center gap-2 text-card-foreground">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
               <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2" />
@@ -27,34 +33,48 @@ const HeroSection = () => {
             <span className="opacity-50">De</span>
             <span className="font-medium text-card-foreground cursor-pointer">Menu +</span>
           </div>
-        </div>
+        </motion.div>
 
         {/* Heading */}
-        <div className="text-center z-10 px-4">
-          <h1 className="text-4xl md:text-5xl lg:text-[3.2rem] font-medium leading-tight text-card-foreground tracking-tight">
+        <div className="flex-1 flex flex-col items-center justify-center text-center z-10 px-4">
+          <motion.h1
+            className="text-4xl md:text-5xl lg:text-[3.5rem] font-medium leading-tight text-card-foreground tracking-tight"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          >
             Revolutionizing <span className="pill-hero">healthcare</span>
             <br />with AI and biotechnology
-          </h1>
-          <p className="mt-4 text-muted-foreground text-sm max-w-md mx-auto leading-relaxed">
+          </motion.h1>
+          <motion.p
+            className="mt-4 text-muted-foreground text-sm max-w-md mx-auto leading-relaxed"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+          >
             Empowering individuals and healthcare professionals with advanced diagnostic tools and personalized treatment plans.
-          </p>
-          {/* Get started button */}
-          <div className="mt-6 flex justify-center">
+          </motion.p>
+          <motion.div
+            className="mt-6 flex justify-center"
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.6, delay: 0.6 }}
+          >
             <button
               className="btn-primary"
               onClick={() => navigate('/dashboard')}
             >
               Get started
             </button>
-          </div>
+          </motion.div>
         </div>
 
         {/* Spline 3D background */}
-        <div className="absolute inset-[-20%] z-0 rounded-3xl overflow-hidden">
+        <div className="absolute inset-0 z-0 overflow-hidden">
           <Suspense fallback={<div className="w-full h-full bg-card" />}>
             <Spline
               scene="https://prod.spline.design/phYv9pSDh3VjEFWm/scene.splinecode"
-              style={{ width: "140%", height: "140%", marginLeft: "-20%", marginTop: "-20%" }}
+              style={{ width: "100%", height: "100%" }}
             />
           </Suspense>
         </div>
