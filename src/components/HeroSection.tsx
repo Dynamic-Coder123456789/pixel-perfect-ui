@@ -8,7 +8,27 @@ const HeroSection = () => {
   return (
     <section id="hero" className="relative px-2 sm:px-4 pb-4 w-full mx-auto">
       {/* Main container */}
-      <div className="section-container relative min-h-[85vh] flex flex-col items-center justify-center overflow-hidden">
+      <div className="section-container relative min-h-[85vh] flex flex-col items-center overflow-hidden">
+        {/* Inner navbar */}
+        <div className="flex items-center justify-between w-full px-8 pt-6 pb-4 z-10">
+          <div className="flex items-center gap-2 text-card-foreground">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+              <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2" />
+              <circle cx="12" cy="12" r="5" stroke="hsl(var(--accent))" strokeWidth="2" />
+            </svg>
+            <span className="text-sm font-medium text-card-foreground">genomic</span>
+          </div>
+          <div className="flex items-center gap-6 text-sm text-muted-foreground">
+            <span className="relative cursor-pointer hover:text-card-foreground transition-colors">For partners <span className="absolute -top-1 -right-2 w-1.5 h-1.5 rounded-full bg-primary" /></span>
+            <span className="cursor-pointer hover:text-card-foreground transition-colors">For investors</span>
+          </div>
+          <div className="flex items-center gap-4 text-sm text-muted-foreground">
+            <span className="cursor-pointer hover:text-card-foreground transition-colors">En</span>
+            <span className="opacity-50">De</span>
+            <span className="font-medium text-card-foreground cursor-pointer">Menu +</span>
+          </div>
+        </div>
+
         {/* Heading */}
         <div className="text-center z-10 px-4">
           <h1 className="text-4xl md:text-5xl lg:text-[3.2rem] font-medium leading-tight text-card-foreground tracking-tight">
