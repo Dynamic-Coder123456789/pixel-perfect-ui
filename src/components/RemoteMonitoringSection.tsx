@@ -2,7 +2,7 @@ import remoteMonitoring from "@/assets/remote-monitoring.jpg";
 
 const RemoteMonitoringSection = () => {
   return (
-    <section id="remote-monitoring" className="relative px-4 sm:px-6 py-12 max-w-[1600px] mx-auto">
+    <section id="remote-monitoring" className="relative px-2 sm:px-4 py-4 w-full mx-auto">
       {/* Gradient background wrapper */}
       <div className="gradient-bg rounded-3xl p-2">
         <div className="section-container relative min-h-[700px] flex flex-col items-center px-8 py-12 overflow-hidden">
