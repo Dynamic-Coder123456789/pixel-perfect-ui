@@ -50,11 +50,11 @@ const HeroSection = () => {
         </div>
 
         {/* Spline 3D background */}
-        <div className="absolute inset-0 z-0 rounded-3xl overflow-hidden">
+        <div className="absolute inset-[-20%] z-0 rounded-3xl overflow-hidden">
           <Suspense fallback={<div className="w-full h-full bg-card" />}>
             <Spline
               scene="https://prod.spline.design/phYv9pSDh3VjEFWm/scene.splinecode"
-              style={{ width: "100%", height: "100%" }}
+              style={{ width: "140%", height: "140%", marginLeft: "-20%", marginTop: "-20%" }}
             />
           </Suspense>
         </div>

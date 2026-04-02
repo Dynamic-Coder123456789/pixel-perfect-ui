@@ -5,7 +5,7 @@ const RemoteMonitoringSection = () => {
     <section id="remote-monitoring" className="relative px-2 sm:px-4 py-4 w-full mx-auto">
       {/* Gradient background wrapper */}
       <div className="gradient-bg rounded-3xl p-2">
-        <div className="section-container relative min-h-[700px] flex flex-col items-center px-8 py-12 overflow-hidden">
+        <div className="section-container relative flex flex-col items-center px-8 py-12 overflow-hidden" style={{ minHeight: 'min(1080px, 100vh)', aspectRatio: '16/9' }}>
           {/* Brain/top background visual */}
           {/* Replace this placeholder image with actual assets later */}
           <div className="absolute top-0 left-0 right-0 h-[200px] overflow-hidden rounded-t-3xl opacity-30">

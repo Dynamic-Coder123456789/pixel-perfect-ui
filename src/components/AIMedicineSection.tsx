@@ -6,7 +6,7 @@ const AIMedicineSection = () => {
 
   return (
     <section id="ai-medicine" className="relative px-2 sm:px-4 py-4 w-full mx-auto">
-      <div className="section-container relative min-h-[80vh] flex flex-col items-center px-8 py-10 overflow-hidden">
+      <div className="section-container relative flex flex-col items-center px-8 py-10 overflow-hidden" style={{ minHeight: 'min(1080px, 100vh)', aspectRatio: '16/9' }}>
         {/* Heading */}
         <div className="text-center z-10 max-w-2xl">
           <h2 className="text-3xl md:text-4xl lg:text-[2.8rem] font-medium leading-tight text-card-foreground tracking-tight">
