@@ -8,7 +8,7 @@ const HeroSection = () => {
   return (
     <section id="hero" className="relative px-2 sm:px-4 pb-4 w-full mx-auto">
       {/* Main container */}
-      <div className="section-container relative min-h-[85vh] flex flex-col items-center overflow-hidden">
+      <div className="section-container relative flex flex-col items-center overflow-hidden" style={{ minHeight: 'min(1080px, 100vh)', aspectRatio: '16/9' }}>
         {/* Inner navbar */}
         <div className="flex items-center justify-between w-full px-8 pt-6 pb-4 z-10">
           <div className="flex items-center gap-2 text-card-foreground">
