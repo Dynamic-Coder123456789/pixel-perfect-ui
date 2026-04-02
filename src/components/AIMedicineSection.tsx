@@ -5,28 +5,8 @@ const AIMedicineSection = () => {
   const [showDemo, setShowDemo] = useState(false);
 
   return (
-    <section id="ai-medicine" className="relative px-4 sm:px-6 py-12 max-w-[1600px] mx-auto">
-      <div className="section-container relative min-h-[750px] flex flex-col items-center px-8 py-10 overflow-hidden">
-        {/* Inner navbar */}
-        <div className="flex items-center justify-between w-full pb-6 z-10">
-          <div className="flex items-center gap-2 text-card-foreground">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-              <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2" />
-              <circle cx="12" cy="12" r="5" stroke="hsl(var(--accent))" strokeWidth="2" />
-            </svg>
-            <span className="text-sm font-medium text-card-foreground">genomic</span>
-          </div>
-          <div className="flex items-center gap-6 text-sm text-muted-foreground">
-            <span className="relative cursor-pointer hover:text-card-foreground transition-colors">For partners <span className="absolute -top-1 -right-2 w-1.5 h-1.5 rounded-full bg-primary" /></span>
-            <span className="cursor-pointer hover:text-card-foreground transition-colors">For investors</span>
-          </div>
-          <div className="flex items-center gap-4 text-sm text-muted-foreground">
-            <span>En</span>
-            <span className="opacity-50">De</span>
-            <span className="font-medium text-card-foreground cursor-pointer">Menu +</span>
-          </div>
-        </div>
-
+    <section id="ai-medicine" className="relative px-2 sm:px-4 py-4 w-full mx-auto">
+      <div className="section-container relative min-h-[80vh] flex flex-col items-center px-8 py-10 overflow-hidden">
         {/* Heading */}
         <div className="text-center z-10 max-w-2xl">
           <h2 className="text-3xl md:text-4xl lg:text-[2.8rem] font-medium leading-tight text-card-foreground tracking-tight">
