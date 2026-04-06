@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, Suspense } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { AreaChart, Area, BarChart, Bar, ResponsiveContainer, XAxis, YAxis } from "recharts";
 import {
@@ -12,90 +12,7 @@ import TiltCard from "@/components/effects/TiltCard";
 import GlassIcon from "@/components/effects/GlassIcon";
 import PixelCard from "@/components/effects/PixelCard";
 import SpotlightCard from "@/components/effects/SpotlightCard";
-
-const ThreeJellyfish = () => {
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (!containerRef.current) return;
-
-    let animationId: number;
-    let scene: any, camera: any, renderer: any;
-
-    const initThree = async () => {
-      const THREE = await import("three");
-
-      scene = new THREE.Scene();
-      camera = new THREE.PerspectiveCamera(
-        75,
-        containerRef.current!.clientWidth / containerRef.current!.clientHeight,
-        0.1,
-        1000
-      );
-      camera.position.z = 3;
-
-      renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-      renderer.setSize(containerRef.current!.clientWidth, containerRef.current!.clientHeight);
-      renderer.setClearColor(0x0f172a, 0);
-      containerRef.current!.appendChild(renderer.domElement);
-
-      const canvas = document.createElement("canvas");
-      canvas.width = 256;
-      canvas.height = 256;
-      const ctx = canvas.getContext("2d")!;
-      const gradient = ctx.createLinearGradient(0, 0, 0, 256);
-      gradient.addColorStop(0, "#1e3a8a");
-      gradient.addColorStop(0.5, "#1e40af");
-      gradient.addColorStop(1, "#0c4a6e");
-      ctx.fillStyle = gradient;
-      ctx.fillRect(0, 0, 256, 256);
-      scene.background = new THREE.CanvasTexture(canvas);
-
-      const geometry = new THREE.IcosahedronGeometry(1, 5);
-      const material = new THREE.MeshPhongMaterial({
-        color: 0x3b82f6,
-        wireframe: true,
-        emissive: 0x3b82f6,
-        emissiveIntensity: 0.3,
-      });
-      const jellyfish = new THREE.Mesh(geometry, material);
-      scene.add(jellyfish);
-
-      const light = new THREE.PointLight(0x06b6d4, 2);
-      light.position.set(5, 5, 5);
-      scene.add(light);
-
-      const ambientLight = new THREE.AmbientLight(0x3b82f6, 0.4);
-      scene.add(ambientLight);
-
-      const animate = () => {
-        animationId = requestAnimationFrame(animate);
-        jellyfish.rotation.x += 0.003;
-        jellyfish.rotation.y += 0.005;
-        jellyfish.scale.y = 1 + Math.sin(Date.now() * 0.001) * 0.1;
-        renderer.render(scene, camera);
-      };
-      animate();
-
-      const handleResize = () => {
-        const width = containerRef.current?.clientWidth || 800;
-        const height = containerRef.current?.clientHeight || 300;
-        camera.aspect = width / height;
-        camera.updateProjectionMatrix();
-        renderer.setSize(width, height);
-      };
-      window.addEventListener("resize", handleResize);
-      return () => {
-        window.removeEventListener("resize", handleResize);
-        cancelAnimationFrame(animationId);
-      };
-    };
-
-    initThree().catch(console.error);
-  }, []);
-
-  return <div ref={containerRef} className="w-full h-full" />;
-};
+import LineWaves from "@/components/effects/LineWaves";
 
 const Dashboard = () => {
   const [sidebarOpen, setSidebarOpen] = useState(true);
@@ -245,9 +162,23 @@ const Dashboard = () => {
           {/* Main Grid — TiltCard for Welcome, PixelCard for Satisfaction */}
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
             <TiltCard className="lg:col-span-2 rounded-2xl overflow-hidden" rotateAmplitude={5}>
-              <div className="relative h-80 bg-gradient-to-br from-blue-900/40 to-cyan-900/30 border border-white/10 rounded-2xl overflow-hidden">
+              <div className="relative h-80 bg-slate-900 border border-white/10 rounded-2xl overflow-hidden">
                 <div className="absolute inset-0 z-0">
-                  <ThreeJellyfish />
+                  <LineWaves
+                    speed={0.3}
+                    innerLineCount={32}
+                    outerLineCount={36}
+                    warpIntensity={1.0}
+                    rotation={-45}
+                    edgeFadeWidth={0.0}
+                    colorCycleSpeed={1.0}
+                    brightness={0.25}
+                    color1="#3b82f6"
+                    color2="#06b6d4"
+                    color3="#8b5cf6"
+                    enableMouseInteraction={true}
+                    mouseInfluence={2.0}
+                  />
                 </div>
                 <div className="absolute inset-0 bg-gradient-to-r from-slate-900/70 via-transparent to-transparent z-[5]" />
                 <div className="absolute top-8 left-8 z-10">
