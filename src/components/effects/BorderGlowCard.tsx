@@ -240,7 +240,7 @@ const BorderGlow: React.FC<BorderGlowProps> = ({
     card.classList.add('sweep-active');
 
     let angle = 0;
-    const speed = 0.8; // degrees per frame
+    const speed = 2; // degrees per frame
 
     function tick() {
       if (!isHovering.current) {
