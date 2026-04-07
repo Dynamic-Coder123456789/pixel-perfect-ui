@@ -22,7 +22,7 @@ const HeroSection = () => {
               <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2" />
               <circle cx="12" cy="12" r="5" stroke="hsl(var(--accent))" strokeWidth="2" />
             </svg>
-            <span className="text-sm font-medium text-card-foreground">genomic</span>
+            <span className="text-sm font-medium text-card-foreground">Synaptic.</span>
           </div>
           <div className="flex items-center gap-6 text-sm text-muted-foreground">
             <span className="relative cursor-pointer hover:text-card-foreground transition-colors">For partners <span className="absolute -top-1 -right-2 w-1.5 h-1.5 rounded-full bg-primary" /></span>
