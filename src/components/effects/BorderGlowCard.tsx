@@ -106,19 +106,19 @@ const STYLES = `
   inset: var(--glow-padding);
   border-radius: inherit;
   box-shadow:
-    inset 0 0 0 1px var(--glow-color, hsl(40deg 80% 80% / 100%)),
-    inset 0 0 1px 0 var(--glow-color-60, hsl(40deg 80% 80% / 60%)),
-    inset 0 0 3px 0 var(--glow-color-50, hsl(40deg 80% 80% / 50%)),
-    inset 0 0 6px 0 var(--glow-color-40, hsl(40deg 80% 80% / 40%)),
-    inset 0 0 15px 0 var(--glow-color-30, hsl(40deg 80% 80% / 30%)),
-    inset 0 0 25px 2px var(--glow-color-20, hsl(40deg 80% 80% / 20%)),
-    inset 0 0 50px 2px var(--glow-color-10, hsl(40deg 80% 80% / 10%)),
-    0 0 1px 0 var(--glow-color-60, hsl(40deg 80% 80% / 60%)),
-    0 0 3px 0 var(--glow-color-50, hsl(40deg 80% 80% / 50%)),
-    0 0 6px 0 var(--glow-color-40, hsl(40deg 80% 80% / 40%)),
-    0 0 15px 0 var(--glow-color-30, hsl(40deg 80% 80% / 30%)),
-    0 0 25px 2px var(--glow-color-20, hsl(40deg 80% 80% / 20%)),
-    0 0 50px 2px var(--glow-color-10, hsl(40deg 80% 80% / 10%));
+    inset 0 0 0 2px var(--glow-color, hsl(40deg 80% 80% / 100%)),
+    inset 0 0 4px 1px var(--glow-color-60, hsl(40deg 80% 80% / 60%)),
+    inset 0 0 8px 2px var(--glow-color-50, hsl(40deg 80% 80% / 50%)),
+    inset 0 0 16px 3px var(--glow-color-40, hsl(40deg 80% 80% / 40%)),
+    inset 0 0 30px 4px var(--glow-color-30, hsl(40deg 80% 80% / 30%)),
+    inset 0 0 50px 6px var(--glow-color-20, hsl(40deg 80% 80% / 20%)),
+    inset 0 0 80px 8px var(--glow-color-10, hsl(40deg 80% 80% / 10%)),
+    0 0 4px 1px var(--glow-color-60, hsl(40deg 80% 80% / 60%)),
+    0 0 8px 2px var(--glow-color-50, hsl(40deg 80% 80% / 50%)),
+    0 0 16px 3px var(--glow-color-40, hsl(40deg 80% 80% / 40%)),
+    0 0 30px 4px var(--glow-color-30, hsl(40deg 80% 80% / 30%)),
+    0 0 50px 6px var(--glow-color-20, hsl(40deg 80% 80% / 20%)),
+    0 0 80px 8px var(--glow-color-10, hsl(40deg 80% 80% / 10%));
 }
 
 .border-glow-inner {
