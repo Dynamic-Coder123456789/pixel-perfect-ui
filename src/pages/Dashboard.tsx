@@ -12,7 +12,8 @@ import TiltCard from "@/components/effects/TiltCard";
 import GlassIcon from "@/components/effects/GlassIcon";
 import PixelCard from "@/components/effects/PixelCard";
 import SpotlightCard from "@/components/effects/SpotlightCard";
-import ColorBends from "@/components/effects/ColorBends";
+import PrismaticBurst from "@/components/effects/PrismaticBurst";
+import LineWaves from "@/components/effects/LineWaves";
 
 const Dashboard = () => {
   const [sidebarOpen, setSidebarOpen] = useState(true);
@@ -56,20 +57,15 @@ const Dashboard = () => {
 
   return (
     <div className="min-h-screen bg-slate-950 text-white relative">
-      {/* ColorBends Background */}
+      {/* PrismaticBurst Background */}
       <div className="fixed inset-0 z-0">
-        <ColorBends
-          colors={["#ff5c7a", "#8a5cff", "#00ffd1"]}
-          rotation={0}
-          speed={0.2}
-          scale={1}
-          frequency={1}
-          warpStrength={1}
-          mouseInfluence={1}
-          parallax={0.5}
-          noise={0.1}
-          transparent
-          autoRotate={0}
+        <PrismaticBurst
+          intensity={1.5}
+          speed={0.3}
+          animationType="rotate3d"
+          colors={["#1e3a5f", "#3b82f6", "#06b6d4", "#8b5cf6"]}
+          distort={3}
+          mixBlendMode="lighten"
         />
       </div>
       {/* Top Navigation */}
