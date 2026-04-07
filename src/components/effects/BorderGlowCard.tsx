@@ -8,15 +8,15 @@ const STYLES = `
   --edge-sensitivity: 30;
   --color-sensitivity: calc(var(--edge-sensitivity) + 20);
   --border-radius: 40px;
-  --glow-padding: 60px;
-  --cone-spread: 25;
+  --glow-padding: 80px;
+  --cone-spread: 40;
 
   position: relative;
   border-radius: var(--border-radius);
   isolation: isolate;
   transform: translate3d(0, 0, 0.01px);
   display: grid;
-  border: 2px solid rgb(255 255 255 / 15%);
+  border: 1px solid rgb(255 255 255 / 15%);
   background: var(--card-bg, #060010);
   overflow: visible;
   box-shadow:
@@ -41,7 +41,7 @@ const STYLES = `
 
 
 .border-glow-card::before {
-  border: 3px solid transparent;
+  border: 1px solid transparent;
   background:
     linear-gradient(var(--card-bg, #060010) 0 100%) padding-box,
     linear-gradient(rgb(255 255 255 / 0%) 0% 100%) border-box,
@@ -65,7 +65,7 @@ const STYLES = `
 }
 
 .border-glow-card::after {
-  border: 3px solid transparent;
+  border: 1px solid transparent;
   background:
     var(--gradient-one, radial-gradient(at 80% 55%, hsla(268, 100%, 76%, 1) 0px, transparent 50%)) padding-box,
     var(--gradient-two, radial-gradient(at 69% 34%, hsla(349, 100%, 74%, 1) 0px, transparent 50%)) padding-box,
@@ -106,19 +106,19 @@ const STYLES = `
   inset: var(--glow-padding);
   border-radius: inherit;
   box-shadow:
-    inset 0 0 0 1px var(--glow-color, hsl(40deg 80% 80% / 100%)),
-    inset 0 0 1px 0 var(--glow-color-60, hsl(40deg 80% 80% / 60%)),
-    inset 0 0 3px 0 var(--glow-color-50, hsl(40deg 80% 80% / 50%)),
-    inset 0 0 6px 0 var(--glow-color-40, hsl(40deg 80% 80% / 40%)),
-    inset 0 0 15px 0 var(--glow-color-30, hsl(40deg 80% 80% / 30%)),
-    inset 0 0 25px 2px var(--glow-color-20, hsl(40deg 80% 80% / 20%)),
-    inset 0 0 50px 2px var(--glow-color-10, hsl(40deg 80% 80% / 10%)),
-    0 0 1px 0 var(--glow-color-60, hsl(40deg 80% 80% / 60%)),
-    0 0 3px 0 var(--glow-color-50, hsl(40deg 80% 80% / 50%)),
-    0 0 6px 0 var(--glow-color-40, hsl(40deg 80% 80% / 40%)),
-    0 0 15px 0 var(--glow-color-30, hsl(40deg 80% 80% / 30%)),
-    0 0 25px 2px var(--glow-color-20, hsl(40deg 80% 80% / 20%)),
-    0 0 50px 2px var(--glow-color-10, hsl(40deg 80% 80% / 10%));
+    inset 0 0 0 2px var(--glow-color, hsl(40deg 80% 80% / 100%)),
+    inset 0 0 4px 1px var(--glow-color-60, hsl(40deg 80% 80% / 60%)),
+    inset 0 0 8px 2px var(--glow-color-50, hsl(40deg 80% 80% / 50%)),
+    inset 0 0 16px 3px var(--glow-color-40, hsl(40deg 80% 80% / 40%)),
+    inset 0 0 30px 4px var(--glow-color-30, hsl(40deg 80% 80% / 30%)),
+    inset 0 0 50px 6px var(--glow-color-20, hsl(40deg 80% 80% / 20%)),
+    inset 0 0 80px 8px var(--glow-color-10, hsl(40deg 80% 80% / 10%)),
+    0 0 4px 1px var(--glow-color-60, hsl(40deg 80% 80% / 60%)),
+    0 0 8px 2px var(--glow-color-50, hsl(40deg 80% 80% / 50%)),
+    0 0 16px 3px var(--glow-color-40, hsl(40deg 80% 80% / 40%)),
+    0 0 30px 4px var(--glow-color-30, hsl(40deg 80% 80% / 30%)),
+    0 0 50px 6px var(--glow-color-20, hsl(40deg 80% 80% / 20%)),
+    0 0 80px 8px var(--glow-color-10, hsl(40deg 80% 80% / 10%));
 }
 
 .border-glow-inner {
