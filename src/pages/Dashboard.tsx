@@ -78,7 +78,7 @@ const Dashboard = () => {
             <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-400 to-cyan-500 flex items-center justify-center text-white font-bold text-sm shadow-lg shadow-blue-500/20">
               V
             </div>
-            <span className="text-xs font-bold tracking-widest text-gray-300">VISION UI FREE</span>
+            <span className="text-xs font-bold tracking-widest text-gray-300">Synaptic.</span>
           </div>
         </div>
         <div className="text-xs text-gray-500 font-medium">Pages / Dashboard</div>
