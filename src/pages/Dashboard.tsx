@@ -147,7 +147,7 @@ const Dashboard = () => {
       </aside>
 
       {/* Main Content */}
-      <main className="pt-20 lg:ml-64 px-6 pb-12">
+      <main className="pt-20 lg:ml-64 px-6 pb-12 relative z-10">
         <div className="max-w-7xl mx-auto">
           <div className="mb-8">
             <h1 className="text-2xl font-bold">Dashboard</h1>
