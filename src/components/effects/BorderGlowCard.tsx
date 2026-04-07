@@ -8,7 +8,7 @@ const STYLES = `
   --edge-sensitivity: 30;
   --color-sensitivity: calc(var(--edge-sensitivity) + 20);
   --border-radius: 40px;
-  --glow-padding: 80px;
+  --glow-padding: 40px;
   --cone-spread: 40;
 
   position: relative;
