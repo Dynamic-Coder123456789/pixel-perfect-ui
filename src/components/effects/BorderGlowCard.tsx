@@ -16,7 +16,7 @@ const STYLES = `
   isolation: isolate;
   transform: translate3d(0, 0, 0.01px);
   display: grid;
-  border: 1px solid rgb(255 255 255 / 15%);
+  border: 10px solid rgb(255 255 255 / 15%);
   background: var(--card-bg, #060010);
   overflow: visible;
   box-shadow:
