@@ -12,6 +12,7 @@ import TiltCard from "@/components/effects/TiltCard";
 import GlassIcon from "@/components/effects/GlassIcon";
 import PixelCard from "@/components/effects/PixelCard";
 import SpotlightCard from "@/components/effects/SpotlightCard";
+import PrismaticBurst from "@/components/effects/PrismaticBurst";
 import LineWaves from "@/components/effects/LineWaves";
 
 const Dashboard = () => {
@@ -55,7 +56,18 @@ const Dashboard = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 text-white">
+    <div className="min-h-screen bg-slate-950 text-white relative">
+      {/* PrismaticBurst Background */}
+      <div className="fixed inset-0 z-0">
+        <PrismaticBurst
+          intensity={1.5}
+          speed={0.3}
+          animationType="rotate3d"
+          colors={["#1e3a5f", "#3b82f6", "#06b6d4", "#8b5cf6"]}
+          distort={3}
+          mixBlendMode="lighten"
+        />
+      </div>
       {/* Top Navigation */}
       <nav className="fixed top-0 inset-x-0 h-16 z-40 bg-slate-900/50 backdrop-blur-xl border-b border-white/5 flex items-center justify-between px-6">
         <div className="flex items-center gap-4">
