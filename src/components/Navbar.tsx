@@ -17,7 +17,7 @@ const Navbar = () => {
           <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2" />
           <circle cx="12" cy="12" r="5" stroke="hsl(var(--accent))" strokeWidth="2" />
         </svg>
-        <span className="font-semibold text-card-foreground">Genomic</span>
+        <span className="font-semibold text-card-foreground">Synaptic</span>
       </div>
 
       {/* Right: Category pills */}
