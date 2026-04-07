@@ -1,4 +1,4 @@
-import { useState, Suspense, lazy } from "react";
+import { useState, Suspense, lazy, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 
 const Spline = lazy(() => import("@splinetool/react-spline"));
@@ -22,23 +22,36 @@ const fadeUp = {
 const AIMedicineSection = () => {
 
   const [showDemo, setShowDemo] = useState(false);
+  const [isInView, setIsInView] = useState(true);
+  const sectionRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsInView(entry.isIntersecting),
+      { threshold: 0.1 }
+    );
+    if (sectionRef.current) observer.observe(sectionRef.current);
+    return () => observer.disconnect();
+  }, []);
 
   return (
 
-    <section id="ai-medicine" className="relative w-full bg-background">
+    <section id="ai-medicine" className="relative w-full bg-background" ref={sectionRef}>
 
       <div className="relative min-h-screen flex items-center justify-center px-8 py-12 overflow-hidden">
 
         {/* Spline 3D Bot - Center */}
         <div className="absolute inset-0 z-0 flex items-center justify-center">
-          <Suspense fallback={<div className="w-full h-full bg-card" />}>
-            <div style={{ width: "100%", height: "100%" }}>
-              <Spline
-                scene="https://prod.spline.design/HGceMlEMZBHAHg98/scene.splinecode"
-                style={{ width: "100%", height: "100%" }}
-              />
-            </div>
-          </Suspense>
+          {isInView && (
+            <Suspense fallback={<div className="w-full h-full bg-card" />}>
+              <div style={{ width: "100%", height: "100%" }}>
+                <Spline
+                  scene="https://prod.spline.design/HGceMlEMZBHAHg98/scene.splinecode"
+                  style={{ width: "100%", height: "100%" }}
+                />
+              </div>
+            </Suspense>
+          )}
         </div>
 
         {/* Content Overlay */}

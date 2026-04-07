@@ -1,4 +1,4 @@
-import { Suspense, lazy } from "react";
+import { Suspense, lazy, useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 
@@ -6,8 +6,19 @@ const Spline = lazy(() => import("@splinetool/react-spline"));
 
 const HeroSection = () => {
   const navigate = useNavigate();
+  const [isInView, setIsInView] = useState(true);
+  const sectionRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsInView(entry.isIntersecting),
+      { threshold: 0.1 }
+    );
+    if (sectionRef.current) observer.observe(sectionRef.current);
+    return () => observer.disconnect();
+  }, []);
   return (
-    <section id="hero" className="relative w-full">
+    <section id="hero" className="relative w-full" ref={sectionRef}>
       {/* Main container - full viewport */}
       <div className="section-container relative min-h-screen flex flex-col items-center overflow-hidden">
         {/* Inner navbar */}
@@ -71,12 +82,14 @@ const HeroSection = () => {
 
         {/* Spline 3D background */}
         <div className="absolute inset-0 z-0 overflow-hidden">
-          <Suspense fallback={<div className="w-full h-full bg-card" />}>
-            <Spline
-              scene="https://prod.spline.design/phYv9pSDh3VjEFWm/scene.splinecode"
-              style={{ width: "100%", height: "100%" }}
-            />
-          </Suspense>
+          {isInView && (
+            <Suspense fallback={<div className="w-full h-full bg-card" />}>
+              <Spline
+                scene="https://prod.spline.design/phYv9pSDh3VjEFWm/scene.splinecode"
+                style={{ width: "100%", height: "100%" }}
+              />
+            </Suspense>
+          )}
         </div>
       </div>
     </section>
