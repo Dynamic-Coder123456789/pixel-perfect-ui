@@ -39,12 +39,6 @@ const STYLES = `
   z-index: -1;
 }
 
-.border-glow-card:not(:hover):not(.sweep-active)::before,
-.border-glow-card:not(:hover):not(.sweep-active)::after,
-.border-glow-card:not(:hover):not(.sweep-active) > .edge-light {
-  opacity: 0;
-  transition: opacity 0.75s ease-in-out;
-}
 
 .border-glow-card::before {
   border: 1px solid transparent;
@@ -221,34 +215,49 @@ function animateValue({ start = 0, end = 100, duration = 1000, delay = 0, ease =
 const BorderGlow: React.FC<BorderGlowProps> = ({
   children,
   className = '',
-  edgeSensitivity = 30,
+  edgeSensitivity = 0,
   glowColor = '40 80 80',
   backgroundColor = '#060010',
   borderRadius = 28,
   glowRadius = 40,
-  glowIntensity = 1.0,
-  coneSpread = 25,
-  animated = false,
+  glowIntensity = 2.0,
+  coneSpread = 40,
+  animated = true,
   colors = ['#c084fc', '#f472b6', '#38bdf8'],
-  fillOpacity = 0.5,
+  fillOpacity = 0.8,
 }) => {
   const cardRef = useRef<HTMLDivElement>(null);
+  const isHovering = useRef(false);
+  const animFrameRef = useRef<number>(0);
+
+  // Continuous spin animation — always on, pauses on hover
+  useEffect(() => {
+    const card = cardRef.current;
+    if (!card) return;
+
+    // Set high edge proximity so glow is always visible
+    card.style.setProperty('--edge-proximity', '100');
+    card.classList.add('sweep-active');
+
+    let angle = 0;
+    const speed = 0.4; // degrees per frame
+
+    function tick() {
+      if (!isHovering.current) {
+        angle = (angle + speed) % 360;
+        card!.style.setProperty('--cursor-angle', `${angle}deg`);
+      }
+      animFrameRef.current = requestAnimationFrame(tick);
+    }
+    animFrameRef.current = requestAnimationFrame(tick);
+
+    return () => cancelAnimationFrame(animFrameRef.current);
+  }, []);
 
   const getCenterOfElement = useCallback((el: HTMLElement) => {
     const { width, height } = el.getBoundingClientRect();
     return [width / 2, height / 2];
   }, []);
-
-  const getEdgeProximity = useCallback((el: HTMLElement, x: number, y: number) => {
-    const [cx, cy] = getCenterOfElement(el);
-    const dx = x - cx;
-    const dy = y - cy;
-    let kx = Infinity;
-    let ky = Infinity;
-    if (dx !== 0) kx = cx / Math.abs(dx);
-    if (dy !== 0) ky = cy / Math.abs(dy);
-    return Math.min(Math.max(1 / Math.min(kx, ky), 0), 1);
-  }, [getCenterOfElement]);
 
   const getCursorAngle = useCallback((el: HTMLElement, x: number, y: number) => {
     const [cx, cy] = getCenterOfElement(el);
@@ -267,31 +276,13 @@ const BorderGlow: React.FC<BorderGlowProps> = ({
     const rect = card.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
-    const edge = getEdgeProximity(card, x, y);
     const angle = getCursorAngle(card, x, y);
-    card.style.setProperty('--edge-proximity', `${(edge * 100).toFixed(3)}`);
+    card.style.setProperty('--edge-proximity', '100');
     card.style.setProperty('--cursor-angle', `${angle.toFixed(3)}deg`);
-  }, [getEdgeProximity, getCursorAngle]);
+  }, [getCursorAngle]);
 
-  useEffect(() => {
-    if (!animated || !cardRef.current) return;
-    const card = cardRef.current;
-    const angleStart = 110;
-    const angleEnd = 465;
-    card.classList.add('sweep-active');
-    card.style.setProperty('--cursor-angle', `${angleStart}deg`);
-    animateValue({ duration: 500, onUpdate: v => card.style.setProperty('--edge-proximity', `${v}`) });
-    animateValue({ ease: easeInCubic, duration: 1500, end: 50, onUpdate: v => {
-      card.style.setProperty('--cursor-angle', `${(angleEnd - angleStart) * (v / 100) + angleStart}deg`);
-    }});
-    animateValue({ ease: easeOutCubic, delay: 1500, duration: 2250, start: 50, end: 100, onUpdate: v => {
-      card.style.setProperty('--cursor-angle', `${(angleEnd - angleStart) * (v / 100) + angleStart}deg`);
-    }});
-    animateValue({ ease: easeInCubic, delay: 2500, duration: 1500, start: 100, end: 0,
-      onUpdate: v => card.style.setProperty('--edge-proximity', `${v}`),
-      onEnd: () => card.classList.remove('sweep-active'),
-    });
-  }, [animated]);
+  const handlePointerEnter = useCallback(() => { isHovering.current = true; }, []);
+  const handlePointerLeave = useCallback(() => { isHovering.current = false; }, []);
 
   const glowVars = buildGlowVars(glowColor, glowIntensity);
 
