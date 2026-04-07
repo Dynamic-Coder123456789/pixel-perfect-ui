@@ -7,7 +7,7 @@ const STYLES = `
   --cursor-angle: 45deg;
   --edge-sensitivity: 30;
   --color-sensitivity: calc(var(--edge-sensitivity) + 20);
-  --border-radius: 28px;
+  --border-radius: 40px;
   --glow-padding: 40px;
   --cone-spread: 25;
 
