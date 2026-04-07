@@ -8,7 +8,7 @@ const STYLES = `
   --edge-sensitivity: 30;
   --color-sensitivity: calc(var(--edge-sensitivity) + 20);
   --border-radius: 40px;
-  --glow-padding: 80px;
+  --glow-padding: 40px;
   --cone-spread: 40;
 
   position: relative;
@@ -41,7 +41,7 @@ const STYLES = `
 
 
 .border-glow-card::before {
-  border: 1px solid transparent;
+  border: 10px solid transparent;
   background:
     linear-gradient(var(--card-bg, #060010) 0 100%) padding-box,
     linear-gradient(rgb(255 255 255 / 0%) 0% 100%) border-box,
@@ -65,7 +65,7 @@ const STYLES = `
 }
 
 .border-glow-card::after {
-  border: 1px solid transparent;
+  border: 15px solid transparent;
   background:
     var(--gradient-one, radial-gradient(at 80% 55%, hsla(268, 100%, 76%, 1) 0px, transparent 50%)) padding-box,
     var(--gradient-two, radial-gradient(at 69% 34%, hsla(349, 100%, 74%, 1) 0px, transparent 50%)) padding-box,
