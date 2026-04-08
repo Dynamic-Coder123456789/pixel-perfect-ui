@@ -107,6 +107,9 @@ const HeroSection = ({ onSplineLoad }: HeroSectionProps) => {
         </p>
       </motion.div>
 
+      {/* Black box to hide Spline watermark */}
+      <div className="absolute bottom-0 right-0 z-[5] w-[200px] h-[50px] bg-black" />
+
       {/* Bottom-right: CTA */}
       <motion.div
         className="absolute bottom-8 right-8 z-10"
