@@ -1,6 +1,9 @@
+import { Suspense, lazy } from "react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import GeometricWireframe from "./effects/GeometricWireframe";
+
+const Spline = lazy(() => import("@splinetool/react-spline"));
 
 const HeroSection = () => {
   const navigate = useNavigate();
@@ -9,8 +12,18 @@ const HeroSection = () => {
     <section
       id="hero"
       className="relative w-full min-h-screen overflow-hidden"
-      style={{ background: "linear-gradient(180deg, #2a2a2a 0%, #3d3d3d 40%, #4a4a4a 60%, #5a5a5a 80%, #6a6a6a 100%)" }}
+      style={{ background: "#1a1a1a" }}
     >
+      {/* Spline 3D background */}
+      <div className="absolute inset-0 z-0 overflow-hidden">
+        <Suspense fallback={<div className="w-full h-full bg-black" />}>
+          <Spline
+            scene="https://prod.spline.design/YOl931tzqWq5hdc2/scene.splinecode"
+            style={{ width: "100%", height: "100%" }}
+          />
+        </Suspense>
+      </div>
+
       {/* Soft center glow */}
       <div
         className="absolute inset-0 z-[1] pointer-events-none"
