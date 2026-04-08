@@ -30,17 +30,15 @@ const AIMedicineSection = () => {
       <div className="relative min-h-screen flex items-center justify-center px-8 py-12 overflow-hidden">
 
         {/* Spline 3D Bot - Center */}
-        <div className="absolute inset-0 z-0 flex items-center justify-center w-full h-full">
-          {isInView && (
-            <Suspense fallback={<div className="w-full h-full bg-card" />}>
-              <div className="w-full h-full">
-                <Spline
-                  scene="https://prod.spline.design/HGceMlEMZBHAHg98/scene.splinecode"
-                  style={{ width: "100%", height: "100%", display: "block" }}
-                />
-              </div>
-            </Suspense>
-          )}
+        <div className="absolute inset-0 z-0 flex items-center justify-center">
+          <Suspense fallback={<div className="w-full h-full bg-card" />}>
+            <div style={{ width: "100%", height: "100%" }}>
+              <Spline
+                scene="https://prod.spline.design/HGceMlEMZBHAHg98/scene.splinecode"
+                style={{ width: "100%", height: "100%" }}
+              />
+            </div>
+          </Suspense>
         </div>
 
         {/* Content Overlay */}

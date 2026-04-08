@@ -1,4 +1,4 @@
-import { Suspense, lazy, useEffect, useRef, useState } from "react";
+import { Suspense, lazy } from "react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import GeometricWireframe from "./effects/GeometricWireframe";
@@ -11,36 +11,22 @@ interface HeroSectionProps {
 
 const HeroSection = ({ onSplineLoad }: HeroSectionProps) => {
   const navigate = useNavigate();
-  const [isInView, setIsInView] = useState(true);
-  const sectionRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => setIsInView(entry.isIntersecting),
-      { threshold: 0.1 }
-    );
-    if (sectionRef.current) observer.observe(sectionRef.current);
-    return () => observer.disconnect();
-  }, []);
 
   return (
     <section
       id="hero"
       className="relative w-full min-h-screen overflow-hidden"
       style={{ background: "#1a1a1a" }}
-      ref={sectionRef}
     >
       {/* Spline 3D background */}
-      <div className="absolute inset-0 z-0 overflow-hidden w-full h-full">
-        {isInView && (
-          <Suspense fallback={<div className="w-full h-full bg-black" />}>
-             <Spline
-                scene="https://prod.spline.design/YOl931tzqWq5hdc2/scene.splinecode"
-                style={{ width: "100%", height: "100%" }}
-                onLoad={() => onSplineLoad?.()}
-              />
-          </Suspense>
-        )}
+      <div className="absolute inset-0 z-0 overflow-hidden">
+        <Suspense fallback={<div className="w-full h-full bg-black" />}>
+           <Spline
+              scene="https://prod.spline.design/YOl931tzqWq5hdc2/scene.splinecode"
+              style={{ width: "100%", height: "100%" }}
+              onLoad={() => onSplineLoad?.()}
+            />
+        </Suspense>
       </div>
 
       {/* Soft center glow */}
@@ -122,7 +108,7 @@ const HeroSection = ({ onSplineLoad }: HeroSectionProps) => {
       </motion.div>
 
       {/* Black box to hide Spline watermark */}
-      <div className="absolute bottom-0 right-0 z-[5] w-[225px] h-[100px] bg-black" />
+      <div className="absolute bottom-0 right-0 z-[5] w-[200px] h-[70px] bg-black" />
 
       {/* Bottom-right: CTA */}
       <motion.div
