@@ -7,6 +7,8 @@ interface Point {
   vy: number;
   baseX: number;
   baseY: number;
+  label: number;
+  labelTimer: number;
 }
 
 interface GeometricWireframeProps {
@@ -20,31 +22,32 @@ interface GeometricWireframeProps {
 const GeometricWireframe = ({
   className = "",
   circleRadius = 200,
-  pointCount = 18,
-  color = "rgba(255, 255, 255, 0.6)",
-  glowColor = "rgba(255, 255, 255, 0.15)",
+  pointCount = 20,
+  color = "rgba(255, 255, 255, 0.55)",
+  glowColor = "rgba(255, 255, 255, 0.08)",
 }: GeometricWireframeProps) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const mouseRef = useRef({ x: 0, y: 0 });
+  const mouseRef = useRef({ x: -9999, y: -9999 });
   const pointsRef = useRef<Point[]>([]);
   const rafRef = useRef(0);
   const sizeRef = useRef({ w: 0, h: 0 });
+  const timeRef = useRef(0);
 
   const initPoints = useCallback(
     (cx: number, cy: number) => {
       const pts: Point[] = [];
       for (let i = 0; i < pointCount; i++) {
-        const angle = (Math.PI * 2 * i) / pointCount + (Math.random() - 0.5) * 0.5;
-        const r = circleRadius * (0.3 + Math.random() * 0.65);
+        const angle = (Math.PI * 2 * i) / pointCount + (Math.random() - 0.5) * 0.8;
+        const r = circleRadius * (0.2 + Math.random() * 0.7);
         const x = cx + Math.cos(angle) * r;
         const y = cy + Math.sin(angle) * r;
         pts.push({
-          x,
-          y,
-          vx: (Math.random() - 0.5) * 0.3,
-          vy: (Math.random() - 0.5) * 0.3,
-          baseX: x,
-          baseY: y,
+          x, y,
+          vx: (Math.random() - 0.5) * 0.5,
+          vy: (Math.random() - 0.5) * 0.5,
+          baseX: x, baseY: y,
+          label: Math.floor(Math.random() * 90 + 10),
+          labelTimer: Math.random() * 60,
         });
       }
       pointsRef.current = pts;
@@ -65,7 +68,9 @@ const GeometricWireframe = ({
       canvas.height = rect.height * dpr;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       sizeRef.current = { w: rect.width, h: rect.height };
-      initPoints(rect.width / 2, rect.height / 2);
+      if (pointsRef.current.length === 0) {
+        initPoints(rect.width / 2, rect.height / 2);
+      }
     };
 
     const onMove = (e: MouseEvent) => {
@@ -82,30 +87,35 @@ const GeometricWireframe = ({
       const cx = w / 2;
       const cy = h / 2;
       const mouse = mouseRef.current;
+      timeRef.current++;
 
       ctx.clearRect(0, 0, w, h);
 
       const pts = pointsRef.current;
+      const t = timeRef.current;
 
-      // Update points - attracted toward mouse within circle
       for (const p of pts) {
+        // Organic drift
+        p.vx += Math.sin(t * 0.02 + p.baseX * 0.01) * 0.03;
+        p.vy += Math.cos(t * 0.02 + p.baseY * 0.01) * 0.03;
+
+        // Mouse attraction
         const dx = mouse.x - p.x;
         const dy = mouse.y - p.y;
         const dist = Math.sqrt(dx * dx + dy * dy);
-
-        // Mouse attraction
-        if (dist > 1) {
-          p.vx += (dx / dist) * 0.08;
-          p.vy += (dy / dist) * 0.08;
+        if (dist > 1 && dist < circleRadius * 2) {
+          const force = 0.15 / (1 + dist * 0.01);
+          p.vx += (dx / dist) * force;
+          p.vy += (dy / dist) * force;
         }
 
-        // Spring back to base
-        p.vx += (p.baseX - p.x) * 0.005;
-        p.vy += (p.baseY - p.y) * 0.005;
+        // Spring to base
+        p.vx += (p.baseX - p.x) * 0.003;
+        p.vy += (p.baseY - p.y) * 0.003;
 
         // Damping
-        p.vx *= 0.95;
-        p.vy *= 0.95;
+        p.vx *= 0.94;
+        p.vy *= 0.94;
 
         p.x += p.vx;
         p.y += p.vy;
@@ -117,57 +127,74 @@ const GeometricWireframe = ({
         if (d > circleRadius) {
           p.x = cx + (toCx / d) * circleRadius;
           p.y = cy + (toCy / d) * circleRadius;
-          p.vx *= -0.5;
-          p.vy *= -0.5;
+          p.vx *= -0.3;
+          p.vy *= -0.3;
+        }
+
+        // Cycle labels
+        p.labelTimer--;
+        if (p.labelTimer <= 0) {
+          p.label = Math.floor(Math.random() * 90 + 10);
+          p.labelTimer = 30 + Math.random() * 90;
         }
       }
 
-      // Draw connections (Delaunay-like triangulation via proximity)
-      ctx.strokeStyle = color;
-      ctx.lineWidth = 0.8;
-
+      // Draw connections - constantly shifting based on proximity
+      ctx.lineWidth = 0.7;
       for (let i = 0; i < pts.length; i++) {
         for (let j = i + 1; j < pts.length; j++) {
           const dx = pts[i].x - pts[j].x;
           const dy = pts[i].y - pts[j].y;
           const dist = Math.sqrt(dx * dx + dy * dy);
-          const maxDist = circleRadius * 0.9;
+          const maxDist = circleRadius * 0.85;
           if (dist < maxDist) {
-            const alpha = 1 - dist / maxDist;
-            ctx.globalAlpha = alpha * 0.5;
+            const alpha = (1 - dist / maxDist) * 0.5;
+            ctx.strokeStyle = color;
+            ctx.globalAlpha = alpha;
             ctx.beginPath();
             ctx.moveTo(pts[i].x, pts[i].y);
             ctx.lineTo(pts[j].x, pts[j].y);
             ctx.stroke();
+
+            // Midpoint measurement tick marks
+            if (dist < maxDist * 0.6 && (i + j) % 4 === 0) {
+              const mx = (pts[i].x + pts[j].x) / 2;
+              const my = (pts[i].y + pts[j].y) / 2;
+              const angle = Math.atan2(dy, dx) + Math.PI / 2;
+              const tickLen = 4;
+              ctx.globalAlpha = alpha * 0.8;
+              ctx.beginPath();
+              ctx.moveTo(mx - Math.cos(angle) * tickLen, my - Math.sin(angle) * tickLen);
+              ctx.lineTo(mx + Math.cos(angle) * tickLen, my + Math.sin(angle) * tickLen);
+              ctx.stroke();
+            }
           }
         }
       }
 
-      // Draw points with labels
+      // Draw points and labels
       ctx.globalAlpha = 1;
-      for (let i = 0; i < pts.length; i++) {
-        const p = pts[i];
-
-        // Point dot
+      for (const p of pts) {
+        // Dot
         ctx.fillStyle = color;
+        ctx.globalAlpha = 0.8;
         ctx.beginPath();
         ctx.arc(p.x, p.y, 2.5, 0, Math.PI * 2);
         ctx.fill();
 
-        // Small label number
-        if (i % 3 === 0) {
-          ctx.font = "10px monospace";
-          ctx.fillStyle = "rgba(255, 255, 255, 0.7)";
-          ctx.fillText(String(Math.floor(10 + i * 3.7)), p.x + 6, p.y - 6);
-        }
+        // Label
+        ctx.font = "9px monospace";
+        ctx.fillStyle = "rgba(255, 255, 255, 0.65)";
+        ctx.globalAlpha = 0.7;
+        ctx.fillText(String(p.label), p.x + 7, p.y - 7);
       }
 
-      // Center glow
+      // Glow
+      ctx.globalAlpha = 1;
       const grd = ctx.createRadialGradient(cx, cy, 0, cx, cy, circleRadius * 1.2);
       grd.addColorStop(0, glowColor);
-      grd.addColorStop(0.5, "rgba(255, 255, 255, 0.05)");
+      grd.addColorStop(0.5, "rgba(255, 255, 255, 0.03)");
       grd.addColorStop(1, "rgba(255, 255, 255, 0)");
-      ctx.globalAlpha = 1;
       ctx.fillStyle = grd;
       ctx.fillRect(0, 0, w, h);
 
