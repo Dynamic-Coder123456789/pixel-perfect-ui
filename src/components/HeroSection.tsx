@@ -5,7 +5,11 @@ import GeometricWireframe from "./effects/GeometricWireframe";
 
 const Spline = lazy(() => import("@splinetool/react-spline"));
 
-const HeroSection = () => {
+interface HeroSectionProps {
+  onSplineLoad?: () => void;
+}
+
+const HeroSection = ({ onSplineLoad }: HeroSectionProps) => {
   const navigate = useNavigate();
 
   return (
@@ -17,10 +21,11 @@ const HeroSection = () => {
       {/* Spline 3D background */}
       <div className="absolute inset-0 z-0 overflow-hidden">
         <Suspense fallback={<div className="w-full h-full bg-black" />}>
-          <Spline
-            scene="https://prod.spline.design/YOl931tzqWq5hdc2/scene.splinecode"
-            style={{ width: "100%", height: "100%" }}
-          />
+           <Spline
+              scene="https://prod.spline.design/YOl931tzqWq5hdc2/scene.splinecode"
+              style={{ width: "100%", height: "100%" }}
+              onLoad={() => onSplineLoad?.()}
+            />
         </Suspense>
       </div>
 
