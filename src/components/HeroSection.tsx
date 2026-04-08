@@ -73,7 +73,7 @@ const HeroSection = () => {
         <div className="absolute inset-0 z-0 overflow-hidden">
           <Suspense fallback={<div className="w-full h-full bg-card" />}>
             <Spline
-              scene="https://prod.spline.design/phYv9pSDh3VjEFWm/scene.splinecode"
+              scene="https://prod.spline.design/YOl931tzqWq5hdc2/scene.splinecode"
               style={{ width: "100%", height: "100%" }}
             />
           </Suspense>
