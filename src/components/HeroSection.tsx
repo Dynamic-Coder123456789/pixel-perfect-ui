@@ -2,6 +2,7 @@ import { Suspense, lazy } from "react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import GeometricWireframe from "./effects/GeometricWireframe";
+import InteractivePointTracker from "./InteractivePointTracker";
 
 const Spline = lazy(() => import("@splinetool/react-spline"));
 
@@ -46,6 +47,9 @@ const HeroSection = ({ onSplineLoad }: HeroSectionProps) => {
           glowColor="rgba(255, 255, 255, 0.08)"
         />
       </div>
+
+      {/* Interactive point tracker */}
+      <InteractivePointTracker />
 
       {/* Top-left: Logo + info */}
       <motion.div
