@@ -1,84 +1,114 @@
-import { Suspense, lazy } from "react";
-import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-
-const Spline = lazy(() => import("@splinetool/react-spline"));
+import { useNavigate } from "react-router-dom";
+import GeometricWireframe from "./effects/GeometricWireframe";
 
 const HeroSection = () => {
   const navigate = useNavigate();
+
   return (
-    <section id="hero" className="relative w-full">
-      {/* Main container - full viewport */}
-      <div className="section-container relative min-h-screen flex flex-col items-center overflow-hidden">
-        {/* Inner navbar */}
-        <motion.div
-          className="flex items-center justify-between w-full px-8 pt-6 pb-4 z-10"
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-        >
-          <div className="flex items-center gap-2 text-card-foreground">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-              <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2" />
-              <circle cx="12" cy="12" r="5" stroke="hsl(var(--accent))" strokeWidth="2" />
-            </svg>
-            <span className="text-sm font-medium text-card-foreground">Synaptic.</span>
-          </div>
-          <div className="flex items-center gap-6 text-sm text-muted-foreground">
-            <span className="relative cursor-pointer hover:text-card-foreground transition-colors">For partners <span className="absolute -top-1 -right-2 w-1.5 h-1.5 rounded-full bg-primary" /></span>
-            <span className="cursor-pointer hover:text-card-foreground transition-colors">For investors</span>
-          </div>
-          <div className="flex items-center gap-4 text-sm text-muted-foreground">
-            <span className="cursor-pointer hover:text-card-foreground transition-colors">En</span>
-            <span className="opacity-50">De</span>
-            <span className="font-medium text-card-foreground cursor-pointer">Menu +</span>
-          </div>
-        </motion.div>
+    <section
+      id="hero"
+      className="relative w-full min-h-screen overflow-hidden"
+      style={{ background: "linear-gradient(180deg, #2a2a2a 0%, #3d3d3d 40%, #4a4a4a 60%, #5a5a5a 80%, #6a6a6a 100%)" }}
+    >
+      {/* Soft center glow */}
+      <div
+        className="absolute inset-0 z-[1] pointer-events-none"
+        style={{
+          background: "radial-gradient(ellipse 50% 60% at 50% 55%, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.04) 40%, transparent 70%)",
+        }}
+      />
 
-        {/* Heading */}
-        <div className="flex-1 flex flex-col items-center justify-center text-center z-10 px-4">
-          <motion.h1
-            className="text-4xl md:text-5xl lg:text-[3.5rem] font-medium leading-tight text-card-foreground tracking-tight"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-          >
-            Revolutionizing <span className="pill-hero">healthcare</span>
-            <br />with AI and biotechnology
-          </motion.h1>
-          <motion.p
-            className="mt-4 text-muted-foreground text-sm max-w-md mx-auto leading-relaxed"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-          >
-            Empowering individuals and healthcare professionals with advanced diagnostic tools and personalized treatment plans.
-          </motion.p>
-          <motion.div
-            className="mt-6 flex justify-center"
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6, delay: 0.6 }}
-          >
-            <button
-              className="btn-primary"
-              onClick={() => navigate('/dashboard')}
-            >
-              Get started
-            </button>
-          </motion.div>
-        </div>
-
-        {/* Spline 3D background */}
-        <div className="absolute inset-0 z-0 overflow-hidden">
-          <Suspense fallback={<div className="w-full h-full bg-card" />}>
-            <Spline
-              scene="https://prod.spline.design/YOl931tzqWq5hdc2/scene.splinecode"
-              style={{ width: "100%", height: "100%" }}
-            />
-          </Suspense>
-        </div>
+      {/* Geometric wireframe - mouse interactive */}
+      <div className="absolute inset-0 z-[2]">
+        <GeometricWireframe
+          circleRadius={220}
+          pointCount={20}
+          color="rgba(255, 255, 255, 0.55)"
+          glowColor="rgba(255, 255, 255, 0.08)"
+        />
       </div>
+
+      {/* Top-left: Logo + info */}
+      <motion.div
+        className="absolute top-8 left-8 z-10"
+        initial={{ opacity: 0, x: -20 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.8 }}
+      >
+        <h2
+          className="text-2xl font-black tracking-widest uppercase mb-2"
+          style={{ color: "rgba(255,255,255,0.9)", fontFamily: "monospace" }}
+        >
+          Synaptic.
+        </h2>
+        <p className="text-xs" style={{ color: "rgba(255,255,255,0.45)", fontFamily: "monospace" }}>
+          // Copyright © 2026
+        </p>
+        <p className="text-xs mt-3 leading-relaxed" style={{ color: "rgba(255,255,255,0.4)", fontFamily: "monospace" }}>
+          Synaptic, Inc.
+          <br />
+          All Rights Reserved.
+        </p>
+      </motion.div>
+
+      {/* Top-right: Manifesto */}
+      <motion.div
+        className="absolute top-8 right-8 z-10 text-right max-w-[260px]"
+        initial={{ opacity: 0, x: 20 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.8, delay: 0.2 }}
+      >
+        <p className="text-xs mb-3" style={{ color: "rgba(255,255,255,0.5)", fontFamily: "monospace" }}>
+          ///// Manifesto
+        </p>
+        <p className="text-xs leading-relaxed" style={{ color: "rgba(255,255,255,0.55)", fontFamily: "monospace" }}>
+          Our mission is to
+          <br />
+          revolutionize healthcare
+          <br />
+          through AI-driven
+          <br />
+          diagnostics and
+          <br />
+          personalized medicine.
+        </p>
+      </motion.div>
+
+      {/* Bottom-left: Scroll hint */}
+      <motion.div
+        className="absolute bottom-8 left-8 z-10"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, delay: 0.6 }}
+      >
+        <p className="text-xs mb-4" style={{ color: "rgba(255,255,255,0.4)", fontFamily: "monospace" }}>
+          Scroll down to
+          <br />
+          discover.
+        </p>
+      </motion.div>
+
+      {/* Bottom-right: CTA */}
+      <motion.div
+        className="absolute bottom-8 right-8 z-10"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, delay: 0.8 }}
+      >
+        <button
+          onClick={() => navigate("/dashboard")}
+          className="px-6 py-2.5 text-xs font-medium tracking-wider uppercase border transition-all duration-300 hover:bg-white/10"
+          style={{
+            color: "rgba(255,255,255,0.7)",
+            borderColor: "rgba(255,255,255,0.25)",
+            fontFamily: "monospace",
+            borderRadius: "2px",
+          }}
+        >
+          Get Started →
+        </button>
+      </motion.div>
     </section>
   );
 };
