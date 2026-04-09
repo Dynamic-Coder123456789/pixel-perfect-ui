@@ -20,10 +20,10 @@ const Dashboard = () => {
   const [activeSection, setActiveSection] = useState("Dashboard");
 
   const statCards = [
-    { label: "Today's Money", value: "$53,000", change: "+68%", icon: <DollarSign className="w-5 h-5" />, glow: "210, 100%, 60%" },
-    { label: "Today's Users", value: "2,300", change: "+3%", icon: <Users className="w-5 h-5" />, glow: "180, 100%, 50%" },
-    { label: "New Clients", value: "+3,052", change: "+5%", icon: <Sparkles className="w-5 h-5" />, glow: "260, 80%, 65%" },
-    { label: "Total Sales", value: "$173,000", change: "+3%", icon: <TrendingUp className="w-5 h-5" />, glow: "145, 80%, 50%" },
+    { label: "Patient Reviews", value: "4.8/5", change: "+12%", icon: <DollarSign className="w-5 h-5" />, glow: "210, 100%, 60%" },
+    { label: "Today's Patients", value: "2,300", change: "+3%", icon: <Users className="w-5 h-5" />, glow: "180, 100%, 50%" },
+    { label: "New Patients", value: "+3,052", change: "+5%", icon: <Sparkles className="w-5 h-5" />, glow: "260, 80%, 65%" },
+    { label: "Upcoming Appointments", value: "48", change: "+8%", icon: <TrendingUp className="w-5 h-5" />, glow: "145, 80%, 50%" },
   ];
 
   const salesData = [
@@ -34,6 +34,15 @@ const Dashboard = () => {
     { month: "Sep", sales: 550 }, { month: "Oct", sales: 700 },
     { month: "Nov", sales: 650 }, { month: "Dec", sales: 750 },
   ];
+
+  const criticalPatient = {
+    name: "Sarah Mitchell",
+    age: 67,
+    heartRate: 112,
+    bp: "158/95",
+    o2: "91%",
+    temp: "101.2°F",
+  };
 
   const barData = [
     { name: "Jan", value: 50 }, { name: "Feb", value: 100 },
@@ -153,6 +162,20 @@ const Dashboard = () => {
             <h1 className="text-2xl font-bold">Dashboard</h1>
           </div>
 
+          {/* Critical Patient Vitals Banner */}
+          <div className="mb-8 p-4 rounded-2xl bg-gradient-to-r from-red-500/10 to-slate-900/80 border border-red-500/20 backdrop-blur-sm">
+            <div className="flex items-center gap-3 mb-3">
+              <div className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
+              <p className="text-xs font-bold text-red-400 uppercase tracking-widest">Critical Patient — {criticalPatient.name}, Age {criticalPatient.age}</p>
+            </div>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              <div><p className="text-[10px] text-gray-500 uppercase">Heart Rate</p><p className="text-lg font-bold text-red-400">{criticalPatient.heartRate} bpm</p></div>
+              <div><p className="text-[10px] text-gray-500 uppercase">Blood Pressure</p><p className="text-lg font-bold text-orange-400">{criticalPatient.bp}</p></div>
+              <div><p className="text-[10px] text-gray-500 uppercase">O₂ Saturation</p><p className="text-lg font-bold text-yellow-400">{criticalPatient.o2}</p></div>
+              <div><p className="text-[10px] text-gray-500 uppercase">Temperature</p><p className="text-lg font-bold text-orange-300">{criticalPatient.temp}</p></div>
+            </div>
+          </div>
+
           {/* Stats Cards — BorderGlow effect */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
             {statCards.map((stat, i) => (
@@ -195,7 +218,7 @@ const Dashboard = () => {
                 <div className="absolute inset-0 bg-gradient-to-r from-slate-900/70 via-transparent to-transparent z-[5]" />
                 <div className="absolute top-8 left-8 z-10">
                   <p className="text-gray-300 text-sm mb-1 font-light">Welcome back,</p>
-                  <h2 className="text-2xl font-bold bg-gradient-to-r from-white to-blue-200 bg-clip-text text-transparent">Mark Johnson</h2>
+                  <h2 className="text-2xl font-bold bg-gradient-to-r from-white to-blue-200 bg-clip-text text-transparent">Dr. Mark Johnson</h2>
                   <p className="text-gray-400 text-xs mt-2">Ask me anything.</p>
                   <button className="mt-4 px-4 py-2 text-xs bg-white/10 backdrop-blur border border-white/10 rounded-xl hover:bg-white/20 transition-all">
                     Tap to generate →
@@ -212,8 +235,8 @@ const Dashboard = () => {
             >
               <div className="p-6 flex flex-col justify-between h-full">
                 <div>
-                  <p className="text-gray-400 text-xs mb-1">Satisfaction Rate</p>
-                  <h3 className="text-xs text-gray-500">From last projects</h3>
+                  <p className="text-gray-400 text-xs mb-1">Patient Satisfaction</p>
+                  <h3 className="text-xs text-gray-500">From recent consultations</h3>
                 </div>
                 <div className="flex flex-col items-center justify-center py-6">
                   <div className="relative w-32 h-32">
@@ -246,8 +269,8 @@ const Dashboard = () => {
             <SpotlightCard className="lg:col-span-2 rounded-2xl bg-gradient-to-br from-slate-800/80 to-slate-900/80 border border-white/5">
               <div className="p-6">
                 <div className="mb-6">
-                  <p className="text-gray-200 text-sm font-semibold mb-1">Sales overview</p>
-                  <p className="text-gray-500 text-xs">Sales have increased by 2.5k in the last month</p>
+                  <p className="text-gray-200 text-sm font-semibold mb-1">Consultations Overview</p>
+                  <p className="text-gray-500 text-xs">Consultations have increased by 2.5k in the last month</p>
                 </div>
                 <div className="h-64">
                   <ResponsiveContainer width="100%" height="100%">
@@ -269,12 +292,12 @@ const Dashboard = () => {
 
             <BorderGlowCard glowColor="145, 80%, 50%" className="bg-gradient-to-br from-slate-800/80 to-slate-900/80 border border-white/5">
               <div className="p-6">
-                <p className="text-gray-200 text-sm font-semibold mb-6">Referral Tracking</p>
+                <p className="text-gray-200 text-sm font-semibold mb-6">Patient Referrals</p>
                 <div className="space-y-6">
                   <div>
                     <div className="flex items-center justify-between mb-2">
-                      <span className="text-sm text-gray-400">Invited</span>
-                      <span className="text-lg font-bold">143 people</span>
+                      <span className="text-sm text-gray-400">Referred</span>
+                      <span className="text-lg font-bold">143 patients</span>
                     </div>
                   </div>
                   <div className="flex justify-center py-4">
@@ -306,7 +329,7 @@ const Dashboard = () => {
               speed={25}
             >
               <div className="p-6">
-                <p className="text-gray-200 text-sm font-semibold mb-1">Active Users</p>
+                <p className="text-gray-200 text-sm font-semibold mb-1">Active Patients</p>
                 <p className="text-gray-500 text-xs mb-4">1,523 from last month</p>
                 <div className="h-56">
                   <ResponsiveContainer width="100%" height="100%">
@@ -324,16 +347,16 @@ const Dashboard = () => {
               <div className="p-6">
                 <div className="flex items-center justify-between mb-6">
                   <div>
-                    <p className="text-gray-200 text-sm font-semibold">Projects</p>
-                    <p className="text-gray-500 text-xs">30 done this month</p>
+                    <p className="text-gray-200 text-sm font-semibold">Treatments</p>
+                    <p className="text-gray-500 text-xs">30 completed this month</p>
                   </div>
                   <div className="text-gray-500 cursor-pointer hover:text-blue-400 transition">⋮</div>
                 </div>
                 <div className="space-y-5">
                   {[
-                    { name: "Website redesign", progress: 80, status: "onTrack" },
-                    { name: "Mobile app", progress: 60, status: "onTrack" },
-                    { name: "Marketing campaign", progress: 40, status: "delayed" },
+                    { name: "Post-Op Recovery — S. Mitchell", progress: 80, status: "onTrack" },
+                    { name: "Chemotherapy Cycle 3 — J. Adams", progress: 60, status: "onTrack" },
+                    { name: "Physical Therapy — R. Chen", progress: 40, status: "delayed" },
                   ].map((project, i) => (
                     <div key={i}>
                       <div className="flex items-center justify-between mb-2">
