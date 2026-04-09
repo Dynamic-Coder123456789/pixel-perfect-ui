@@ -64,7 +64,7 @@ const HeroSection = ({ onSplineLoad }: HeroSectionProps) => {
           // Copyright © 2026
         </p>
         <p className="text-xs mt-3 leading-relaxed" style={{ color: "rgba(255,255,255,0.4)", fontFamily: "monospace" }}>
-          Synaptic, Inc.
+          Vedant Wankhede.
           <br />
           All Rights Reserved.
         </p>
