@@ -35,14 +35,6 @@ const Dashboard = () => {
     { month: "Nov", sales: 650 }, { month: "Dec", sales: 750 },
   ];
 
-  const criticalPatient = {
-    name: "Sarah Mitchell",
-    age: 67,
-    heartRate: 112,
-    bp: "158/95",
-    o2: "91%",
-    temp: "101.2°F",
-  };
 
   const barData = [
     { name: "Jan", value: 50 }, { name: "Feb", value: 100 },
