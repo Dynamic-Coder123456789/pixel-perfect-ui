@@ -35,14 +35,6 @@ const Dashboard = () => {
     { month: "Nov", sales: 650 }, { month: "Dec", sales: 750 },
   ];
 
-  const criticalPatient = {
-    name: "Sarah Mitchell",
-    age: 67,
-    heartRate: 112,
-    bp: "158/95",
-    o2: "91%",
-    temp: "101.2°F",
-  };
 
   const barData = [
     { name: "Jan", value: 50 }, { name: "Feb", value: 100 },
@@ -162,19 +154,6 @@ const Dashboard = () => {
             <h1 className="text-2xl font-bold">Dashboard</h1>
           </div>
 
-          {/* Critical Patient Vitals Banner */}
-          <div className="mb-8 p-4 rounded-2xl bg-gradient-to-r from-red-500/10 to-slate-900/80 border border-red-500/20 backdrop-blur-sm">
-            <div className="flex items-center gap-3 mb-3">
-              <div className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
-              <p className="text-xs font-bold text-red-400 uppercase tracking-widest">Critical Patient — {criticalPatient.name}, Age {criticalPatient.age}</p>
-            </div>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              <div><p className="text-[10px] text-gray-500 uppercase">Heart Rate</p><p className="text-lg font-bold text-red-400">{criticalPatient.heartRate} bpm</p></div>
-              <div><p className="text-[10px] text-gray-500 uppercase">Blood Pressure</p><p className="text-lg font-bold text-orange-400">{criticalPatient.bp}</p></div>
-              <div><p className="text-[10px] text-gray-500 uppercase">O₂ Saturation</p><p className="text-lg font-bold text-yellow-400">{criticalPatient.o2}</p></div>
-              <div><p className="text-[10px] text-gray-500 uppercase">Temperature</p><p className="text-lg font-bold text-orange-300">{criticalPatient.temp}</p></div>
-            </div>
-          </div>
 
           {/* Stats Cards — BorderGlow effect */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
