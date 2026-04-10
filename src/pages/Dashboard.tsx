@@ -82,17 +82,30 @@ const Dashboard = () => {
     return () => document.removeEventListener("mousedown", handler);
   }, []);
 
+  const addPatient = () => {
+    if (!newPatient.name.trim() || !newPatient.age || !newPatient.condition.trim()) return;
+    const id = `P-${1001 + patients.length}`;
+    const today = new Date().toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
+    setPatients(prev => [...prev, { id, name: newPatient.name, age: parseInt(newPatient.age), condition: newPatient.condition, status: newPatient.status, lastVisit: today }]);
+    setNewPatient({ name: "", age: "", condition: "", status: "Stable" });
+    setShowAddPatient(false);
+  };
+
   const handleSearch = (q: string) => {
     setSearchQuery(q);
     if (q.trim().length === 0) { setSearchResults([]); setShowSearch(false); return; }
     const results: string[] = [];
-    patientsTable.forEach(p => {
+    patients.forEach(p => {
       if (p.name.toLowerCase().includes(q.toLowerCase()) || p.condition.toLowerCase().includes(q.toLowerCase()))
         results.push(`Patient: ${p.name} — ${p.condition}`);
     });
     billingData.forEach(b => {
       if (b.patient.toLowerCase().includes(q.toLowerCase()) || b.service.toLowerCase().includes(q.toLowerCase()))
         results.push(`Invoice ${b.id}: ${b.patient} — ${b.service}`);
+    });
+    clinicalNotes.forEach(n => {
+      if (n.patientName.toLowerCase().includes(q.toLowerCase()) || n.note.toLowerCase().includes(q.toLowerCase()))
+        results.push(`Note (${n.patientName}): ${n.note.slice(0, 60)}...`);
     });
     if (results.length === 0) results.push("No results found");
     setSearchResults(results);
