@@ -226,6 +226,35 @@ const Dashboard = () => {
           </table>
         </div>
       </div>
+
+      {/* Clinical Notes Section */}
+      <h2 className="text-xl font-bold mt-8">Clinical Notes</h2>
+      {clinicalNotes.length === 0 ? (
+        <div className="rounded-2xl bg-gradient-to-br from-slate-800/80 to-slate-900/80 border border-white/5 p-8 text-center">
+          <Sparkles className="w-8 h-8 text-gray-600 mx-auto mb-3" />
+          <p className="text-sm text-gray-400">No clinical notes yet.</p>
+          <p className="text-xs text-gray-500 mt-1">Go to Dashboard and use the clinical notes generator to create notes for your patients.</p>
+        </div>
+      ) : (
+        <div className="space-y-3">
+          {clinicalNotes.map((note, i) => (
+            <div key={i} className="rounded-2xl bg-gradient-to-br from-slate-800/80 to-slate-900/80 border border-white/5 p-5">
+              <div className="flex items-center justify-between mb-2">
+                <div className="flex items-center gap-2">
+                  <span className="text-xs font-mono text-blue-400">{note.patientId}</span>
+                  <span className="text-sm font-semibold">{note.patientName}</span>
+                </div>
+                <span className="text-[10px] text-gray-500">{note.timestamp}</span>
+              </div>
+              <p className="text-xs text-gray-300 leading-relaxed whitespace-pre-wrap">{note.note}</p>
+              <div className="flex gap-2 mt-3">
+                <button onClick={() => { navigator.clipboard.writeText(note.note); alert("Note copied to clipboard."); }} className="px-3 py-1.5 text-[10px] bg-white/5 border border-white/10 rounded-lg hover:bg-white/10 transition flex items-center gap-1"><Copy className="w-3 h-3" /> Copy</button>
+                <button onClick={() => setClinicalNotes(prev => prev.filter((_, idx) => idx !== i))} className="px-3 py-1.5 text-[10px] bg-red-500/10 border border-red-500/20 text-red-400 rounded-lg hover:bg-red-500/20 transition flex items-center gap-1"><Trash2 className="w-3 h-3" /> Delete</button>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 
