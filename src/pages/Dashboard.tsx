@@ -193,7 +193,19 @@ const Dashboard = () => {
   // ─── Section Renderers ───
   const renderTablesSection = () => (
     <div className="space-y-6">
-      <h2 className="text-xl font-bold">Patient Records</h2>
+      <div className="flex items-center justify-between">
+        <h2 className="text-xl font-bold">Patient Records</h2>
+        <button onClick={() => setShowAddPatient(true)} className="px-4 py-2 text-xs bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 rounded-xl hover:bg-emerald-500/30 transition flex items-center gap-2">
+          <Plus className="w-3.5 h-3.5" /> Add Patient
+        </button>
+      </div>
+      {patients.length === 0 ? (
+        <div className="rounded-2xl bg-gradient-to-br from-slate-800/80 to-slate-900/80 border border-white/5 p-8 text-center">
+          <Users className="w-8 h-8 text-gray-600 mx-auto mb-3" />
+          <p className="text-sm text-gray-400">No patients yet.</p>
+          <p className="text-xs text-gray-500 mt-1">Add your first patient using the button above or from the Dashboard.</p>
+        </div>
+      ) : (
       <div className="rounded-2xl bg-gradient-to-br from-slate-800/80 to-slate-900/80 border border-white/5 overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
