@@ -24,14 +24,8 @@ const notifications = [
   { id: 5, text: "Prescription renewal request from M. Davis", time: "3 hrs ago", read: true },
 ];
 
-const patientsTable = [
-  { id: "P-1001", name: "Sarah Mitchell", age: 34, condition: "Post-Op Recovery", status: "Stable", lastVisit: "Apr 7, 2026" },
-  { id: "P-1002", name: "James Adams", age: 62, condition: "Chemotherapy", status: "Critical", lastVisit: "Apr 8, 2026" },
-  { id: "P-1003", name: "Rachel Chen", age: 45, condition: "Physical Therapy", status: "Improving", lastVisit: "Apr 6, 2026" },
-  { id: "P-1004", name: "Michael Davis", age: 28, condition: "Fracture Recovery", status: "Stable", lastVisit: "Apr 5, 2026" },
-  { id: "P-1005", name: "Linda Park", age: 55, condition: "Cardiac Monitoring", status: "Stable", lastVisit: "Apr 9, 2026" },
-  { id: "P-1006", name: "Tom Wilson", age: 71, condition: "Diabetes Management", status: "Monitoring", lastVisit: "Apr 4, 2026" },
-];
+type Patient = { id: string; name: string; age: number; condition: string; status: string; lastVisit: string };
+
 
 const billingData = [
   { id: "INV-3001", patient: "Sarah Mitchell", service: "Post-Op Follow-up", amount: "$350", date: "Apr 7, 2026", status: "Paid" },
