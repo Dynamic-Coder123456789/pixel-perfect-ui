@@ -62,6 +62,8 @@ const Dashboard = () => {
   const [showAccountSettings, setShowAccountSettings] = useState(false);
   const [aiInsight, setAiInsight] = useState("");
   const [aiLoading, setAiLoading] = useState(false);
+  const [clinicalInput, setClinicalInput] = useState("");
+  const [clinicalNotes, setClinicalNotes] = useState<{ patientId: string; patientName: string; note: string; timestamp: string }[]>([]);
   const [treatmentMenu, setTreatmentMenu] = useState(false);
   const [ordersMenu, setOrdersMenu] = useState(false);
   const [isRTL, setIsRTL] = useState(false);
