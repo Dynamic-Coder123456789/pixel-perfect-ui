@@ -374,9 +374,16 @@ const Dashboard = () => {
             <div className="absolute top-8 left-8 z-10 max-w-md">
               <p className="text-gray-300 text-sm mb-1 font-light">Welcome back,</p>
               <h2 className="text-2xl font-bold bg-gradient-to-r from-white to-blue-200 bg-clip-text text-transparent">Dr. Mark Johnson</h2>
-              <p className="text-gray-400 text-xs mt-2">Ask me anything.</p>
-              <button onClick={generateInsight} disabled={aiLoading} className="mt-4 px-4 py-2 text-xs bg-white/10 backdrop-blur border border-white/10 rounded-xl hover:bg-white/20 transition-all disabled:opacity-50">
-                {aiLoading ? "Generating..." : "Tap to generate →"}
+              <p className="text-gray-400 text-xs mt-2">Enter patient details to generate clinical notes.</p>
+              <textarea
+                value={clinicalInput}
+                onChange={e => setClinicalInput(e.target.value)}
+                placeholder="e.g. Mitchell presented with elevated heart rate, mild chest pain..."
+                className="mt-3 w-full px-3 py-2 text-xs bg-white/5 border border-white/10 rounded-xl outline-none focus:border-blue-500/50 transition resize-none text-white placeholder:text-gray-500"
+                rows={3}
+              />
+              <button onClick={generateInsight} disabled={aiLoading || !clinicalInput.trim()} className="mt-2 px-4 py-2 text-xs bg-white/10 backdrop-blur border border-white/10 rounded-xl hover:bg-white/20 transition-all disabled:opacity-50">
+                {aiLoading ? "Generating..." : "Generate Clinical Notes →"}
               </button>
               {aiInsight && (
                 <div className="mt-3 p-3 rounded-xl bg-blue-500/10 border border-blue-500/20 text-xs text-blue-200 leading-relaxed max-h-32 overflow-y-auto">
