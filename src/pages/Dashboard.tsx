@@ -413,7 +413,13 @@ const Dashboard = () => {
             <div className="absolute top-8 left-8 z-10 max-w-md">
               <p className="text-gray-300 text-sm mb-1 font-light">Welcome back,</p>
               <h2 className="text-2xl font-bold bg-gradient-to-r from-white to-blue-200 bg-clip-text text-transparent">Dr. Mark Johnson</h2>
-              <p className="text-gray-400 text-xs mt-2">Enter patient details to generate clinical notes.</p>
+              <p className="text-gray-400 text-xs mt-2">Manage patients & generate clinical notes.</p>
+              <div className="flex gap-2 mt-3">
+                <button onClick={() => setShowAddPatient(true)} className="px-4 py-2 text-xs bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 rounded-xl hover:bg-emerald-500/30 transition flex items-center gap-1.5">
+                  <Plus className="w-3.5 h-3.5" /> Add Patient
+                </button>
+                <span className="px-3 py-2 text-xs bg-white/5 border border-white/10 rounded-xl text-gray-400">{patients.length} patients</span>
+              </div>
               <textarea
                 value={clinicalInput}
                 onChange={e => setClinicalInput(e.target.value)}
