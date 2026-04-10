@@ -248,6 +248,7 @@ const Dashboard = () => {
           </table>
         </div>
       </div>
+      )}
 
       {/* Clinical Notes Section */}
       <h2 className="text-xl font-bold mt-8">Clinical Notes</h2>
