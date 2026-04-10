@@ -130,7 +130,7 @@ const Dashboard = () => {
       const note = data.output || data.response || data.result || JSON.stringify(data);
       setAiInsight(note);
       // Find best matching patient from input
-      const matchedPatient = patientsTable.find(p =>
+      const matchedPatient = patients.find(p =>
         clinicalInput.toLowerCase().includes(p.name.toLowerCase().split(" ")[1].toLowerCase())
       );
       setClinicalNotes(prev => [
@@ -209,7 +209,7 @@ const Dashboard = () => {
               </tr>
             </thead>
             <tbody>
-              {patientsTable.map((p) => (
+              {patients.map((p) => (
                 <tr key={p.id} className="border-b border-white/5 hover:bg-white/5 transition">
                   <td className="px-6 py-4 text-gray-300 font-mono text-xs">{p.id}</td>
                   <td className="px-6 py-4 font-medium">{p.name}</td>
