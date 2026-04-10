@@ -627,6 +627,43 @@ const Dashboard = () => {
         <PrismaticBurst intensity={1.5} speed={0.3} animationType="rotate3d" colors={["#1e3a5f", "#3b82f6", "#06b6d4", "#8b5cf6"]} distort={3} mixBlendMode="lighten" />
       </div>
 
+
+      {/* Add Patient Modal */}
+      {showAddPatient && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 backdrop-blur-sm" onClick={() => setShowAddPatient(false)}>
+          <div className="bg-slate-900 border border-white/10 rounded-2xl p-8 max-w-md w-full mx-4 shadow-2xl" onClick={e => e.stopPropagation()}>
+            <h3 className="text-lg font-bold mb-6 flex items-center gap-2"><Plus className="w-5 h-5 text-emerald-400" /> Add New Patient</h3>
+            <div className="space-y-4">
+              <div>
+                <label className="text-xs text-gray-400 mb-1 block">Full Name *</label>
+                <input value={newPatient.name} onChange={e => setNewPatient(p => ({ ...p, name: e.target.value }))} placeholder="e.g. Sarah Mitchell" className="w-full px-3 py-2 text-sm bg-white/5 border border-white/10 rounded-xl outline-none focus:border-blue-500/50 transition" />
+              </div>
+              <div>
+                <label className="text-xs text-gray-400 mb-1 block">Age *</label>
+                <input type="number" value={newPatient.age} onChange={e => setNewPatient(p => ({ ...p, age: e.target.value }))} placeholder="e.g. 34" className="w-full px-3 py-2 text-sm bg-white/5 border border-white/10 rounded-xl outline-none focus:border-blue-500/50 transition" />
+              </div>
+              <div>
+                <label className="text-xs text-gray-400 mb-1 block">Condition *</label>
+                <input value={newPatient.condition} onChange={e => setNewPatient(p => ({ ...p, condition: e.target.value }))} placeholder="e.g. Post-Op Recovery" className="w-full px-3 py-2 text-sm bg-white/5 border border-white/10 rounded-xl outline-none focus:border-blue-500/50 transition" />
+              </div>
+              <div>
+                <label className="text-xs text-gray-400 mb-1 block">Status</label>
+                <select value={newPatient.status} onChange={e => setNewPatient(p => ({ ...p, status: e.target.value }))} className="w-full px-3 py-2 text-sm bg-white/5 border border-white/10 rounded-xl outline-none focus:border-blue-500/50 transition text-white">
+                  <option value="Stable" className="bg-slate-900">Stable</option>
+                  <option value="Critical" className="bg-slate-900">Critical</option>
+                  <option value="Improving" className="bg-slate-900">Improving</option>
+                  <option value="Monitoring" className="bg-slate-900">Monitoring</option>
+                </select>
+              </div>
+            </div>
+            <div className="flex gap-3 mt-6">
+              <button onClick={addPatient} disabled={!newPatient.name.trim() || !newPatient.age || !newPatient.condition.trim()} className="flex-1 py-2.5 text-sm bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 rounded-xl hover:bg-emerald-500/30 transition disabled:opacity-50">Add Patient</button>
+              <button onClick={() => setShowAddPatient(false)} className="flex-1 py-2.5 text-sm bg-white/5 text-gray-400 border border-white/10 rounded-xl hover:bg-white/10 transition">Cancel</button>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Profile Modal */}
       {showProfile && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 backdrop-blur-sm" onClick={() => setShowProfile(false)}>
