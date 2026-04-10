@@ -58,8 +58,10 @@ const Dashboard = () => {
   const [aiLoading, setAiLoading] = useState(false);
   const [clinicalInput, setClinicalInput] = useState("");
   const [clinicalNotes, setClinicalNotes] = useState<{ patientId: string; patientName: string; note: string; timestamp: string }[]>([]);
+  const [patients, setPatients] = useState<Patient[]>([]);
+  const [showAddPatient, setShowAddPatient] = useState(false);
+  const [newPatient, setNewPatient] = useState({ name: "", age: "", condition: "", status: "Stable" });
   const [treatmentMenu, setTreatmentMenu] = useState(false);
-  const [ordersMenu, setOrdersMenu] = useState(false);
   const [isRTL, setIsRTL] = useState(false);
 
   const notifRef = useRef<HTMLDivElement>(null);
