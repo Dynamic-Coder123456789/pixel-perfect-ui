@@ -752,7 +752,7 @@ const Dashboard = () => {
               <div className="absolute top-full mt-2 w-72 bg-slate-800 border border-white/10 rounded-xl shadow-2xl overflow-hidden z-50">
                 {searchResults.map((r, i) => (
                   <button key={i} onClick={() => {
-                    if (r.includes("Patient:")) setActiveSection("Tables");
+                    if (r.includes("Patient:") || r.includes("Note (")) setActiveSection("Tables");
                     else if (r.includes("Invoice")) setActiveSection("Billing");
                     setShowSearch(false);
                     setSearchQuery("");
