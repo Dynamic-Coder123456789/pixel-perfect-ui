@@ -6,7 +6,7 @@ import {
   LayoutDashboard, Table, CreditCard, Globe,
   User, Settings, UserPlus,
   DollarSign, Users, Sparkles, TrendingUp,
-  Check, Trash2, Eye, Edit, Download, Copy, Plus,
+  Check, Trash2, Eye, Edit, Download, Copy,
 } from "lucide-react";
 import BorderGlowCard from "@/components/effects/BorderGlowCard";
 import TiltCard from "@/components/effects/TiltCard";
@@ -24,8 +24,14 @@ const notifications = [
   { id: 5, text: "Prescription renewal request from M. Davis", time: "3 hrs ago", read: true },
 ];
 
-type Patient = { id: string; name: string; age: number; condition: string; status: string; lastVisit: string };
-
+const patientsTable = [
+  { id: "P-1001", name: "Sarah Mitchell", age: 34, condition: "Post-Op Recovery", status: "Stable", lastVisit: "Apr 7, 2026" },
+  { id: "P-1002", name: "James Adams", age: 62, condition: "Chemotherapy", status: "Critical", lastVisit: "Apr 8, 2026" },
+  { id: "P-1003", name: "Rachel Chen", age: 45, condition: "Physical Therapy", status: "Improving", lastVisit: "Apr 6, 2026" },
+  { id: "P-1004", name: "Michael Davis", age: 28, condition: "Fracture Recovery", status: "Stable", lastVisit: "Apr 5, 2026" },
+  { id: "P-1005", name: "Linda Park", age: 55, condition: "Cardiac Monitoring", status: "Stable", lastVisit: "Apr 9, 2026" },
+  { id: "P-1006", name: "Tom Wilson", age: 71, condition: "Diabetes Management", status: "Monitoring", lastVisit: "Apr 4, 2026" },
+];
 
 const billingData = [
   { id: "INV-3001", patient: "Sarah Mitchell", service: "Post-Op Follow-up", amount: "$350", date: "Apr 7, 2026", status: "Paid" },
@@ -58,9 +64,6 @@ const Dashboard = () => {
   const [aiLoading, setAiLoading] = useState(false);
   const [clinicalInput, setClinicalInput] = useState("");
   const [clinicalNotes, setClinicalNotes] = useState<{ patientId: string; patientName: string; note: string; timestamp: string }[]>([]);
-  const [patients, setPatients] = useState<Patient[]>([]);
-  const [showAddPatient, setShowAddPatient] = useState(false);
-  const [newPatient, setNewPatient] = useState({ name: "", age: "", condition: "", status: "Stable" });
   const [treatmentMenu, setTreatmentMenu] = useState(false);
   const [ordersMenu, setOrdersMenu] = useState(false);
   const [isRTL, setIsRTL] = useState(false);
@@ -82,30 +85,17 @@ const Dashboard = () => {
     return () => document.removeEventListener("mousedown", handler);
   }, []);
 
-  const addPatient = () => {
-    if (!newPatient.name.trim() || !newPatient.age || !newPatient.condition.trim()) return;
-    const id = `P-${1001 + patients.length}`;
-    const today = new Date().toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
-    setPatients(prev => [...prev, { id, name: newPatient.name, age: parseInt(newPatient.age), condition: newPatient.condition, status: newPatient.status, lastVisit: today }]);
-    setNewPatient({ name: "", age: "", condition: "", status: "Stable" });
-    setShowAddPatient(false);
-  };
-
   const handleSearch = (q: string) => {
     setSearchQuery(q);
     if (q.trim().length === 0) { setSearchResults([]); setShowSearch(false); return; }
     const results: string[] = [];
-    patients.forEach(p => {
+    patientsTable.forEach(p => {
       if (p.name.toLowerCase().includes(q.toLowerCase()) || p.condition.toLowerCase().includes(q.toLowerCase()))
         results.push(`Patient: ${p.name} — ${p.condition}`);
     });
     billingData.forEach(b => {
       if (b.patient.toLowerCase().includes(q.toLowerCase()) || b.service.toLowerCase().includes(q.toLowerCase()))
         results.push(`Invoice ${b.id}: ${b.patient} — ${b.service}`);
-    });
-    clinicalNotes.forEach(n => {
-      if (n.patientName.toLowerCase().includes(q.toLowerCase()) || n.note.toLowerCase().includes(q.toLowerCase()))
-        results.push(`Note (${n.patientName}): ${n.note.slice(0, 60)}...`);
     });
     if (results.length === 0) results.push("No results found");
     setSearchResults(results);
@@ -130,7 +120,7 @@ const Dashboard = () => {
       const note = data.output || data.response || data.result || JSON.stringify(data);
       setAiInsight(note);
       // Find best matching patient from input
-      const matchedPatient = patients.find(p =>
+      const matchedPatient = patientsTable.find(p =>
         clinicalInput.toLowerCase().includes(p.name.toLowerCase().split(" ")[1].toLowerCase())
       );
       setClinicalNotes(prev => [
@@ -193,19 +183,7 @@ const Dashboard = () => {
   // ─── Section Renderers ───
   const renderTablesSection = () => (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
-        <h2 className="text-xl font-bold">Patient Records</h2>
-        <button onClick={() => setShowAddPatient(true)} className="px-4 py-2 text-xs bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 rounded-xl hover:bg-emerald-500/30 transition flex items-center gap-2">
-          <Plus className="w-3.5 h-3.5" /> Add Patient
-        </button>
-      </div>
-      {patients.length === 0 ? (
-        <div className="rounded-2xl bg-gradient-to-br from-slate-800/80 to-slate-900/80 border border-white/5 p-8 text-center">
-          <Users className="w-8 h-8 text-gray-600 mx-auto mb-3" />
-          <p className="text-sm text-gray-400">No patients yet.</p>
-          <p className="text-xs text-gray-500 mt-1">Add your first patient using the button above or from the Dashboard.</p>
-        </div>
-      ) : (
+      <h2 className="text-xl font-bold">Patient Records</h2>
       <div className="rounded-2xl bg-gradient-to-br from-slate-800/80 to-slate-900/80 border border-white/5 overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
@@ -221,7 +199,7 @@ const Dashboard = () => {
               </tr>
             </thead>
             <tbody>
-              {patients.map((p) => (
+              {patientsTable.map((p) => (
                 <tr key={p.id} className="border-b border-white/5 hover:bg-white/5 transition">
                   <td className="px-6 py-4 text-gray-300 font-mono text-xs">{p.id}</td>
                   <td className="px-6 py-4 font-medium">{p.name}</td>
@@ -248,7 +226,6 @@ const Dashboard = () => {
           </table>
         </div>
       </div>
-      )}
 
       {/* Clinical Notes Section */}
       <h2 className="text-xl font-bold mt-8">Clinical Notes</h2>
@@ -426,13 +403,7 @@ const Dashboard = () => {
             <div className="absolute top-8 left-8 z-10 max-w-md">
               <p className="text-gray-300 text-sm mb-1 font-light">Welcome back,</p>
               <h2 className="text-2xl font-bold bg-gradient-to-r from-white to-blue-200 bg-clip-text text-transparent">Dr. Mark Johnson</h2>
-              <p className="text-gray-400 text-xs mt-2">Manage patients & generate clinical notes.</p>
-              <div className="flex gap-2 mt-3">
-                <button onClick={() => setShowAddPatient(true)} className="px-4 py-2 text-xs bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 rounded-xl hover:bg-emerald-500/30 transition flex items-center gap-1.5">
-                  <Plus className="w-3.5 h-3.5" /> Add Patient
-                </button>
-                <span className="px-3 py-2 text-xs bg-white/5 border border-white/10 rounded-xl text-gray-400">{patients.length} patients</span>
-              </div>
+              <p className="text-gray-400 text-xs mt-2">Enter patient details to generate clinical notes.</p>
               <textarea
                 value={clinicalInput}
                 onChange={e => setClinicalInput(e.target.value)}
@@ -640,43 +611,6 @@ const Dashboard = () => {
         <PrismaticBurst intensity={1.5} speed={0.3} animationType="rotate3d" colors={["#1e3a5f", "#3b82f6", "#06b6d4", "#8b5cf6"]} distort={3} mixBlendMode="lighten" />
       </div>
 
-
-      {/* Add Patient Modal */}
-      {showAddPatient && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 backdrop-blur-sm" onClick={() => setShowAddPatient(false)}>
-          <div className="bg-slate-900 border border-white/10 rounded-2xl p-8 max-w-md w-full mx-4 shadow-2xl" onClick={e => e.stopPropagation()}>
-            <h3 className="text-lg font-bold mb-6 flex items-center gap-2"><Plus className="w-5 h-5 text-emerald-400" /> Add New Patient</h3>
-            <div className="space-y-4">
-              <div>
-                <label className="text-xs text-gray-400 mb-1 block">Full Name *</label>
-                <input value={newPatient.name} onChange={e => setNewPatient(p => ({ ...p, name: e.target.value }))} placeholder="e.g. Sarah Mitchell" className="w-full px-3 py-2 text-sm bg-white/5 border border-white/10 rounded-xl outline-none focus:border-blue-500/50 transition" />
-              </div>
-              <div>
-                <label className="text-xs text-gray-400 mb-1 block">Age *</label>
-                <input type="number" value={newPatient.age} onChange={e => setNewPatient(p => ({ ...p, age: e.target.value }))} placeholder="e.g. 34" className="w-full px-3 py-2 text-sm bg-white/5 border border-white/10 rounded-xl outline-none focus:border-blue-500/50 transition" />
-              </div>
-              <div>
-                <label className="text-xs text-gray-400 mb-1 block">Condition *</label>
-                <input value={newPatient.condition} onChange={e => setNewPatient(p => ({ ...p, condition: e.target.value }))} placeholder="e.g. Post-Op Recovery" className="w-full px-3 py-2 text-sm bg-white/5 border border-white/10 rounded-xl outline-none focus:border-blue-500/50 transition" />
-              </div>
-              <div>
-                <label className="text-xs text-gray-400 mb-1 block">Status</label>
-                <select value={newPatient.status} onChange={e => setNewPatient(p => ({ ...p, status: e.target.value }))} className="w-full px-3 py-2 text-sm bg-white/5 border border-white/10 rounded-xl outline-none focus:border-blue-500/50 transition text-white">
-                  <option value="Stable" className="bg-slate-900">Stable</option>
-                  <option value="Critical" className="bg-slate-900">Critical</option>
-                  <option value="Improving" className="bg-slate-900">Improving</option>
-                  <option value="Monitoring" className="bg-slate-900">Monitoring</option>
-                </select>
-              </div>
-            </div>
-            <div className="flex gap-3 mt-6">
-              <button onClick={addPatient} disabled={!newPatient.name.trim() || !newPatient.age || !newPatient.condition.trim()} className="flex-1 py-2.5 text-sm bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 rounded-xl hover:bg-emerald-500/30 transition disabled:opacity-50">Add Patient</button>
-              <button onClick={() => setShowAddPatient(false)} className="flex-1 py-2.5 text-sm bg-white/5 text-gray-400 border border-white/10 rounded-xl hover:bg-white/10 transition">Cancel</button>
-            </div>
-          </div>
-        </div>
-      )}
-
       {/* Profile Modal */}
       {showProfile && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 backdrop-blur-sm" onClick={() => setShowProfile(false)}>
@@ -765,7 +699,7 @@ const Dashboard = () => {
               <div className="absolute top-full mt-2 w-72 bg-slate-800 border border-white/10 rounded-xl shadow-2xl overflow-hidden z-50">
                 {searchResults.map((r, i) => (
                   <button key={i} onClick={() => {
-                    if (r.includes("Patient:") || r.includes("Note (")) setActiveSection("Tables");
+                    if (r.includes("Patient:")) setActiveSection("Tables");
                     else if (r.includes("Invoice")) setActiveSection("Billing");
                     setShowSearch(false);
                     setSearchQuery("");
