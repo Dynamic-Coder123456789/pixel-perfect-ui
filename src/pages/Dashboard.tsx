@@ -6,7 +6,7 @@ import {
   LayoutDashboard, Table, CreditCard, Globe,
   User, Settings, UserPlus,
   DollarSign, Users, Sparkles, TrendingUp,
-  Check, Trash2, Eye, Edit, Download, Copy,
+  Check, Trash2, Eye, Edit, Download, Copy, Plus,
 } from "lucide-react";
 import BorderGlowCard from "@/components/effects/BorderGlowCard";
 import TiltCard from "@/components/effects/TiltCard";
