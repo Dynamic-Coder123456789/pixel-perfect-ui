@@ -106,13 +106,38 @@ const Dashboard = () => {
   const deleteNotif = (id: number) => setNotifList(notifList.filter(n => n.id !== id));
   const unreadCount = notifList.filter(n => !n.read).length;
 
-  const generateInsight = () => {
+  const generateInsight = async () => {
+    if (!clinicalInput.trim()) return;
     setAiLoading(true);
     setAiInsight("");
-    setTimeout(() => {
-      setAiInsight(aiInsights[Math.floor(Math.random() * aiInsights.length)]);
+    try {
+      const res = await fetch("http://localhost:8000", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ input: clinicalInput }),
+      });
+      const data = await res.json();
+      const note = data.output || data.response || data.result || JSON.stringify(data);
+      setAiInsight(note);
+      // Find best matching patient from input
+      const matchedPatient = patientsTable.find(p =>
+        clinicalInput.toLowerCase().includes(p.name.toLowerCase().split(" ")[1].toLowerCase())
+      );
+      setClinicalNotes(prev => [
+        {
+          patientId: matchedPatient?.id || "General",
+          patientName: matchedPatient?.name || "General Note",
+          note,
+          timestamp: new Date().toLocaleString(),
+        },
+        ...prev,
+      ]);
+      setClinicalInput("");
+    } catch (err) {
+      setAiInsight("Error: Could not connect to localhost:8000. Make sure your backend is running.");
+    } finally {
       setAiLoading(false);
-    }, 1500);
+    }
   };
 
   const handleLogout = () => {
