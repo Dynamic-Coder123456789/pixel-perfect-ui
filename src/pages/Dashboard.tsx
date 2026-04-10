@@ -62,6 +62,7 @@ const Dashboard = () => {
   const [showAddPatient, setShowAddPatient] = useState(false);
   const [newPatient, setNewPatient] = useState({ name: "", age: "", condition: "", status: "Stable" });
   const [treatmentMenu, setTreatmentMenu] = useState(false);
+  const [ordersMenu, setOrdersMenu] = useState(false);
   const [isRTL, setIsRTL] = useState(false);
 
   const notifRef = useRef<HTMLDivElement>(null);
