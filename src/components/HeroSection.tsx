@@ -1,7 +1,7 @@
 import { Suspense, lazy } from "react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
-
+import GeometricWireframe from "./effects/GeometricWireframe";
 
 const Spline = lazy(() => import("@splinetool/react-spline"));
 
@@ -29,15 +29,7 @@ const HeroSection = ({ onSplineLoad }: HeroSectionProps) => {
         </Suspense>
       </div>
 
-      {/* Geometric wireframe - mouse interactive */}
-      <div className="absolute inset-0 z-[2]">
-        <GeometricWireframe
-          circleRadius={220}
-          pointCount={20}
-          color="rgba(255, 255, 255, 0.55)"
-          glowColor="rgba(255, 255, 255, 0.08)"
-        />
-      </div>
+
 
       {/* Top-left: Logo + info */}
       <motion.div
@@ -127,3 +119,4 @@ const HeroSection = ({ onSplineLoad }: HeroSectionProps) => {
 };
 
 export default HeroSection;
+
