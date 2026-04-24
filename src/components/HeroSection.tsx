@@ -24,7 +24,7 @@ const HeroSection = ({ onSplineLoad, videoSrc }: HeroSectionProps) => {
     >
       {/* Video background — sits behind everything */}
       {videoSrc && (
-        <div className="absolute inset-0 z-[-1] overflow-hidden">
+        <div className="absolute inset-0 z-[0] overflow-hidden">
           <video
             src={video}
             autoPlay
@@ -38,7 +38,7 @@ const HeroSection = ({ onSplineLoad, videoSrc }: HeroSectionProps) => {
       )}
 
       {/* Spline 3D background */}
-      <div className="absolute inset-0 z-0 overflow-hidden">
+      <div className="absolute inset-0 z-1 overflow-hidden">
         <Suspense fallback={<div className="w-full h-full bg-black" />}>
           <Spline
             scene="https://prod.spline.design/OxuPNsreCUwyfYta/scene.splinecode"
