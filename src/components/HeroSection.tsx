@@ -2,7 +2,7 @@ import { Suspense, lazy } from "react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import GeometricWireframe from "./effects/GeometricWireframe";
-
+import video from "./cyberpunk-2077-night-city-moewalls-com (1).mp4";
 const Spline = lazy(() => import("@splinetool/react-spline"));
 
 interface HeroSectionProps {
@@ -26,7 +26,7 @@ const HeroSection = ({ onSplineLoad, videoSrc }: HeroSectionProps) => {
       {videoSrc && (
         <div className="absolute inset-0 z-[-1] overflow-hidden">
           <video
-            src={videoSrc}
+            src={video}
             autoPlay
             loop
             muted
