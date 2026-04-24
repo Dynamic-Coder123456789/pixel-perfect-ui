@@ -7,9 +7,13 @@ const Spline = lazy(() => import("@splinetool/react-spline"));
 
 interface HeroSectionProps {
   onSplineLoad?: () => void;
+  videoSrc?: string;
 }
 
-const HeroSection = ({ onSplineLoad }: HeroSectionProps) => {
+const MONO = "'Space Mono', monospace";
+const DISPLAY = "'Space Grotesk', sans-serif";
+
+const HeroSection = ({ onSplineLoad, videoSrc }: HeroSectionProps) => {
   const navigate = useNavigate();
 
   return (
@@ -18,18 +22,31 @@ const HeroSection = ({ onSplineLoad }: HeroSectionProps) => {
       className="relative w-full min-h-screen overflow-hidden"
       style={{ background: "#1a1a1a" }}
     >
+      {/* Video background — sits behind everything */}
+      {videoSrc && (
+        <div className="absolute inset-0 z-[-1] overflow-hidden">
+          <video
+            src={videoSrc}
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="absolute inset-0 w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-black/40" />
+        </div>
+      )}
+
       {/* Spline 3D background */}
       <div className="absolute inset-0 z-0 overflow-hidden">
         <Suspense fallback={<div className="w-full h-full bg-black" />}>
-           <Spline
-              scene="https://prod.spline.design/OxuPNsreCUwyfYta/scene.splinecode"
-              style={{ width: "100%", height: "100%" }}
-              onLoad={() => onSplineLoad?.()}
-            />
+          <Spline
+            scene="https://prod.spline.design/OxuPNsreCUwyfYta/scene.splinecode"
+            style={{ width: "100%", height: "100%" }}
+            onLoad={() => onSplineLoad?.()}
+          />
         </Suspense>
       </div>
-
-
 
       {/* Top-left: Logo + info */}
       <motion.div
@@ -38,16 +55,42 @@ const HeroSection = ({ onSplineLoad }: HeroSectionProps) => {
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.8 }}
       >
+        {/* Logo — Space Grotesk ExtraBold, all-caps, matches iGLOO style */}
         <h2
-          className="text-2xl font-black tracking-widest uppercase mb-2"
-          style={{ color: "rgba(255,255,255,0.9)", fontFamily: "monospace" }}
+          className="uppercase mb-2 tracking-tight leading-none"
+          style={{
+            fontFamily: DISPLAY,
+            fontWeight: 800,
+            fontSize: "2rem",
+            color: "rgba(255,255,255,0.95)",
+            letterSpacing: "-0.01em",
+          }}
         >
           Synaptic.
         </h2>
-        <p className="text-xs" style={{ color: "rgba(255,255,255,0.45)", fontFamily: "monospace" }}>
+
+        {/* Copyright line */}
+        <p
+          style={{
+            fontFamily: MONO,
+            fontSize: "0.7rem",
+            color: "rgba(255,255,255,0.45)",
+            marginTop: "2px",
+          }}
+        >
           // Copyright © 2026
         </p>
-        <p className="text-xs mt-3 leading-relaxed" style={{ color: "rgba(255,255,255,0.4)", fontFamily: "monospace" }}>
+
+        {/* Author line */}
+        <p
+          style={{
+            fontFamily: MONO,
+            fontSize: "0.7rem",
+            color: "rgba(255,255,255,0.4)",
+            marginTop: "10px",
+            lineHeight: "1.7",
+          }}
+        >
           Vedant Wankhede.
           <br />
           All Rights Reserved.
@@ -61,10 +104,25 @@ const HeroSection = ({ onSplineLoad }: HeroSectionProps) => {
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.8, delay: 0.2 }}
       >
-        <p className="text-xs mb-3" style={{ color: "rgba(255,255,255,0.5)", fontFamily: "monospace" }}>
-          ///// Manifesto
+        <p
+          style={{
+            fontFamily: MONO,
+            fontSize: "0.65rem",
+            color: "rgba(255,255,255,0.5)",
+            marginBottom: "10px",
+            letterSpacing: "0.05em",
+          }}
+        >
+          ////// Manifesto
         </p>
-        <p className="text-xs leading-relaxed" style={{ color: "rgba(255,255,255,0.55)", fontFamily: "monospace" }}>
+        <p
+          style={{
+            fontFamily: MONO,
+            fontSize: "0.7rem",
+            color: "rgba(255,255,255,0.55)",
+            lineHeight: "1.8",
+          }}
+        >
           Our mission is to
           <br />
           revolutionize healthcare
@@ -84,7 +142,15 @@ const HeroSection = ({ onSplineLoad }: HeroSectionProps) => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 0.6 }}
       >
-        <p className="text-xs mb-4" style={{ color: "rgba(255,255,255,0.4)", fontFamily: "monospace" }}>
+        <p
+          style={{
+            fontFamily: MONO,
+            fontSize: "0.7rem",
+            color: "rgba(255,255,255,0.4)",
+            lineHeight: "1.7",
+            marginBottom: "16px",
+          }}
+        >
           Scroll down to
           <br />
           discover.
@@ -103,12 +169,18 @@ const HeroSection = ({ onSplineLoad }: HeroSectionProps) => {
       >
         <button
           onClick={() => navigate("/dashboard")}
-          className="px-6 py-2.5 text-xs font-medium tracking-wider uppercase border transition-all duration-300 hover:bg-white/10"
+          className="px-6 py-2.5 transition-all duration-300 hover:bg-white/10"
           style={{
+            fontFamily: MONO,
+            fontSize: "0.7rem",
+            fontWeight: 700,
+            letterSpacing: "0.12em",
+            textTransform: "uppercase",
             color: "rgba(255,255,255,0.7)",
-            borderColor: "rgba(255,255,255,0.25)",
-            fontFamily: "monospace",
+            border: "1px solid rgba(255,255,255,0.25)",
             borderRadius: "2px",
+            background: "transparent",
+            cursor: "pointer",
           }}
         >
           Get Started →
@@ -119,4 +191,3 @@ const HeroSection = ({ onSplineLoad }: HeroSectionProps) => {
 };
 
 export default HeroSection;
-
