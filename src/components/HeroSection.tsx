@@ -24,7 +24,7 @@ const HeroSection = ({ onSplineLoad, videoSrc }: HeroSectionProps) => {
     >
       {/* Video background — sits behind everything */}
       {videoSrc && (
-        <div className="absolute inset-0 z-[0] overflow-hidden">
+        <div className="absolute inset-0 z-[2] overflow-hidden">
           <video
             src={video}
             autoPlay
