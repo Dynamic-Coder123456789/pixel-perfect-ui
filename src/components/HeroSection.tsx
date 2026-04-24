@@ -5,7 +5,7 @@ import * as THREE from "three";
 
 // ─── Replace with your local video path ───────────────────────────────────────
 const VIDEO_SRC =
-  "https://videos.pexels.com/video-files/3129957/3129957-uhd_3840_2160_30fps.mp4";
+  "https://player.cloudinary.com/embed/?cloud_name=dcsejqspv&public_id=space-explorer-moewalls-com_wqlska";
 // ─────────────────────────────────────────────────────────────────────────────
 
 /* ── Dot positions matched to reference image scatter ── */
